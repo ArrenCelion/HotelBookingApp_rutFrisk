@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using HotelBookingApp.Utilities;
 using HotelBookingApp.Controllers;
 using HotelBookingApp.Services;
+using HotelBookingApp.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HotelBookingApp
 {
@@ -14,6 +17,13 @@ namespace HotelBookingApp
     {
         public void Run()
         {
+            var builder = new ConfigurationBuilder().AddJsonFile($"appsettings.json", true, true);
+            var config = builder.Build();
+
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var connectionString = config.GetConnectionString("DefaultConnection");
+            options.UseSqlServer(connectionString);
+
             StartMenu();
         }
 
