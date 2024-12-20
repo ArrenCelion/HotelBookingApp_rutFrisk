@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Models
 {
-    internal class Guest //Make guest dto later for the information that needs to be seen
+    public class Guest //Make guest dto later for the information that needs to be seen
     {
         public int GuestId { get; set; }
         public string FirstName { get; set; }

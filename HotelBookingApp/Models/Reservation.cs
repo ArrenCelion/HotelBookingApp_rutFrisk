@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Models
 {
-    internal class Reservation
+    public class Reservation
     {
         public int ReservationId { get; set; }
         public DateTime ArrivalDate { get; set; }
