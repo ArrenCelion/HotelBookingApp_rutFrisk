@@ -1,5 +1,4 @@
-﻿using CodeFirst.Models;
-using HotelBookingApp.Models;
+﻿using HotelBookingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,12 +10,12 @@ namespace CodeFirst.Data
 {
     internal class DataInitializer
     {
-        public void MigrateAndSeed(ApplicationDbContext dbContext)
-        {
-            dbContext.Database.Migrate();
-            //SeedMenus(dbContext);
-            dbContext.SaveChanges();
-        }
+        //public void MigrateAndSeed(ApplicationDbContext dbContext)
+        //{
+        //    dbContext.Database.Migrate();
+        //    //SeedMenus(dbContext);
+        //    dbContext.SaveChanges();
+        //}
 
        /* private void SeedMenus(ApplicationDbContext dbContext)
         {
@@ -50,12 +49,12 @@ namespace CodeFirst.Data
                 });
             }
 
-            if (!dbContext.Menu.Any(m => m.Name == "Booking Menu"))
+            if (!dbContext.Menu.Any(m => m.Name == "Reservation Menu"))
             {
                 dbContext.Menu.Add(new Menu
                 {
-                    MenuName = "Booking Menu",
-                    MenuPrompt = "Booking Menu:",
+                    MenuName = "Reservation Menu",
+                    MenuPrompt = "Reservation Menu:",
                     //MenuOptions = { "Rooms", "Guests", "Bookings", "Close App" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
                 });
             }

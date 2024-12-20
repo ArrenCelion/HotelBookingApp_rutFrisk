@@ -14,11 +14,14 @@ namespace HotelBookingApp
     {
         public void Run()
         {
+            StartMenu();
+        }
 
-
-            //MenuController menuController = new MenuController();
-            //MenuService menuService = new MenuService();
-            //menuController.RunMainMenu(menuService);
+        public void StartMenu()
+        {
+            MenuController menuController = new MenuController();
+            MenuService menuService = new MenuService();
+            menuController.RunMainMenu(menuService);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace HotelBookingApp.Services
 
 
 
-        //Går det att göra detta mindre?? DRY? + if already created do not create again
+        //Går det att göra detta mindre?? DRY? + if already created do not create again Autofac??
         public DisplayMenu CreateMainMenu()
         {
             string prompt = "Welcome to the Hotell, what do you wanna check?";
@@ -42,8 +42,8 @@ namespace HotelBookingApp.Services
 
         public DisplayMenu CreateBookingMenu()
         {
-            string prompt = "Booking Menu:";
-            string[] options = { "See all Bookings", "New Booking", "Update Booking", "Remove Booking", "Back to Main Menu" };
+            string prompt = "Reservation Menu:";
+            string[] options = { "See all Bookings", "New Reservation", "Update Reservation", "Remove Reservation", "Back to Main Menu" };
             DisplayMenu guestMenu = new DisplayMenu(prompt, options);
 
             return guestMenu;
