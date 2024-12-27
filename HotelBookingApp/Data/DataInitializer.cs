@@ -1,4 +1,5 @@
-﻿using HotelBookingApp.Models;
+﻿using HotelBookingApp.Data;
+using HotelBookingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace CodeFirst.Data
 {
     internal class DataInitializer
     {
-        //public void MigrateAndSeed(ApplicationDbContext dbContext)
-        //{
-        //    dbContext.Database.Migrate();
-        //    //SeedMenus(dbContext);
-        //    dbContext.SaveChanges();
-        //}
+        public void MigrateAndSeed(ApplicationDbContext dbContext)
+        {
+            dbContext.Database.Migrate();
+            //SeedGuests(dbContext);
+            dbContext.SaveChanges();
+        }
 
         private void SeedGuests()
         {
