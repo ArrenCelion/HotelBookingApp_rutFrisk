@@ -12,7 +12,7 @@ namespace HotelBookingApp.Services
 
 
 
-        //Går det att göra detta mindre?? DRY? + if already created do not create again Autofac??
+        //Går det att göra detta mindre?? DRY? + if already created do not create again Autofac?? Spectre.Console??
         public DisplayMenu CreateMainMenu()
         {
             string prompt = "Welcome to the Hotell, what do you wanna check?";

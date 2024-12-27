@@ -17,6 +17,12 @@ namespace CodeFirst.Data
         //    dbContext.SaveChanges();
         //}
 
+        private void SeedGuests()
+        {
+            //Använda bogus? 
+        }
+
+
        /* private void SeedMenus(ApplicationDbContext dbContext)
         {
             if (!dbContext.Menu.Any(m => m.Name == "Main Menu"))
