@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Services
 {
-    internal class RoomService
+    internal class ReservationService
     {
-        public void CreateNewRoom()
+        public void CreateNewReservation()
         {
 
         }
 
-        public void ReadAllRooms()
+        public void ReadAllReservations()
         {
 
         }
 
-        public void UpdateRoom()
+        public void UpdateReservation()
         {
 
         }
 
-        public void RemoveRoom()
+        public void RemoveReservation()
         {
             //Soft Delete
         }
 
-        public void DeleteRoom()
+        public void DeleteReservation()
         {
             //Hard Delete - kan bara göras om entiteten är soft deletad
         }

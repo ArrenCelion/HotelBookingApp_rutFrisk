@@ -8,6 +8,6 @@ namespace HotelBookingApp.Controllers
 {
     internal class RoomController
     {
-        //CRUD and methods
+        //Ask the Service for Crud and send back information
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBookingApp.Services
+namespace HotelBookingApp.Controllers
 {
-    internal class CustomerService
+    internal class GuestController
     {
+        //Ask the Service for Crud and send back information
     }
 }
