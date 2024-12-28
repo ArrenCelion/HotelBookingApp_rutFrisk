@@ -10,6 +10,7 @@ using HotelBookingApp.Services;
 using HotelBookingApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace HotelBookingApp
 {
@@ -24,6 +25,11 @@ namespace HotelBookingApp
             var connectionString = config.GetConnectionString("DefaultConnection");
             options.UseSqlServer(connectionString);
 
+            using (var dbContext = new ApplicationDbContext(options.Options))
+            {
+                dbContext.Database.Migrate();
+            }
+
             StartMenu();
         }
 
@@ -32,6 +38,8 @@ namespace HotelBookingApp
             MenuController menuController = new MenuController();
             MenuService menuService = new MenuService();
             menuController.RunMainMenu(menuService);
+
+
         }
     }
 }

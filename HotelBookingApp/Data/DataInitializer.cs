@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeFirst.Data
+namespace HotelBookingApp.Data
 {
     internal class DataInitializer
     {
