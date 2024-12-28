@@ -75,6 +75,7 @@ namespace HotelBookingApp.Controllers
                     break;
                 case 1:
                     Console.WriteLine("Adding new guest");
+                    GuestController.AddGuest();
                     Console.ReadKey();
                     break;
                 case 2:
