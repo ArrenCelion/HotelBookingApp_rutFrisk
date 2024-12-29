@@ -1,4 +1,5 @@
 ﻿using HotelBookingApp.Services;
+using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Utilities;
 using System;
 using System.Collections.Generic;
@@ -8,25 +9,31 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Controllers
 {
-    internal class MenuController
+    public class MenuController : IMenuController
     {
-
-        public void RunMainMenu(MenuService menuService) 
+        IMenuService _menuService;
+        IGuestController _guestController;
+        public MenuController(IMenuService menuService, IGuestController guestController)
         {
-            
-            var mainMenu = menuService.CreateMainMenu();
+            _menuService = menuService;
+            _guestController = guestController; 
+        }
+        public void RunMainMenu()
+        {
+
+            var mainMenu = _menuService.CreateMainMenu();
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)
             {
                 case 0:
-                    RunRoomMenu(menuService);
+                    RunRoomMenu();
                     break;
                 case 1:
-                    RunGuestMenu(menuService);
+                    RunGuestMenu();
                     break;
                 case 2:
-                    RunBookingMenu(menuService);
+                    RunBookingMenu();
                     break;
                 case 3:
                     Environment.Exit(0);
@@ -35,9 +42,9 @@ namespace HotelBookingApp.Controllers
 
         }
 
-        public void RunRoomMenu(MenuService menuService)
+        public void RunRoomMenu()
         {
-            var roomMenu = menuService.CreateRoomMenu();
+            var roomMenu = _menuService.CreateRoomMenu();
             int selectedIndex = roomMenu.Run();
             switch (selectedIndex)
             {
@@ -59,14 +66,14 @@ namespace HotelBookingApp.Controllers
                     Console.ReadKey();
                     break;
                 case 4:
-                    RunMainMenu(menuService);
+                    RunMainMenu();
                     break;
             }
         }
 
-        public void RunGuestMenu(MenuService menuService)
+        public void RunGuestMenu()
         {
-            var guestMenu = menuService.CreateGuestMenu();
+            var guestMenu = _menuService.CreateGuestMenu();
             int selectedIndex = guestMenu.Run();
             switch (selectedIndex)
             {
@@ -76,7 +83,7 @@ namespace HotelBookingApp.Controllers
                     break;
                 case 1:
                     Console.WriteLine("Adding new guest");
-                    GuestController.AddGuest();
+                    _guestController.AddGuest();
                     Console.ReadKey();
                     break;
                 case 2:
@@ -88,14 +95,14 @@ namespace HotelBookingApp.Controllers
                     Console.ReadKey();
                     break;
                 case 4:
-                    RunMainMenu(menuService);
+                    RunMainMenu();
                     break;
             }
         }
 
-        public void RunBookingMenu(MenuService menuService)
+        public void RunBookingMenu()
         {
-            var bookingMenu = menuService.CreateBookingMenu();
+            var bookingMenu = _menuService.CreateBookingMenu();
             int selectedIndex = bookingMenu.Run();
 
             switch (selectedIndex)
@@ -117,7 +124,7 @@ namespace HotelBookingApp.Controllers
                     Console.ReadKey();
                     break;
                 case 4:
-                    RunMainMenu(menuService);
+                    RunMainMenu();
                     break;
             }
         }

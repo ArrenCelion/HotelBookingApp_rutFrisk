@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Controllers
 {
-    internal class ReservationController
+    public class ReservationController
     {
         //Ask the Service for Crud and send back information
     }

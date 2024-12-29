@@ -1,13 +1,20 @@
-﻿using Spectre.Console;
+﻿using Autofac;
+using Spectre.Console;
 
 namespace HotelBookingApp
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-           var app = new App();
-           app.Run();
+            var container = ContainerConfig.Configure();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<IApplication>();
+                app.Run();
+            }
+           
+            
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Data
 {
-    internal class DataInitializer
+    public class DataInitializer
     {
         public void MigrateAndSeed(ApplicationDbContext dbContext)
         {
@@ -32,7 +32,7 @@ namespace HotelBookingApp.Data
                 {
                     MenuName = "Main Menu",
                     MenuPrompt = "Welcome to the Hotell, what do you wanna check?",
-                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close App" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
+                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close Application" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
                 });
             }
 
@@ -42,7 +42,7 @@ namespace HotelBookingApp.Data
                 {
                     MenuName = "Room Menu",
                     MenuPrompt = "Room Menu:",
-                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close App" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
+                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close Application" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
                 });
             }
 
@@ -52,7 +52,7 @@ namespace HotelBookingApp.Data
                 {
                     MenuName = "Guest Menu",
                     MenuPrompt = "Guest Menu:",
-                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close App" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
+                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close Application" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
                 });
             }
 
@@ -62,7 +62,7 @@ namespace HotelBookingApp.Data
                 {
                     MenuName = "Reservation Menu",
                     MenuPrompt = "Reservation Menu:",
-                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close App" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
+                    //MenuOptions = { "Rooms", "Guests", "Bookings", "Close Application" } //Göra till ett eget table i en class som heter MenuOptions som blir seedad? och lägga in MenuId som fk i den?
                 });
             }
 

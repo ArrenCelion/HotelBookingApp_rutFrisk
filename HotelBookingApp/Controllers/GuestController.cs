@@ -7,25 +7,44 @@ using HotelBookingApp.Utilities.Validation;
 using FluentValidation.Results;
 using HotelBookingApp.Models;
 using Spectre.Console;
+using HotelBookingApp.Services;
+using HotelBookingApp.Data;
+using HotelBookingApp.Services.ServiceInterfaces;
 
 namespace HotelBookingApp.Controllers
 {
-    internal class GuestController
+    public class GuestController : IGuestController
     {
-        //Ask the Service for Crud and send back information
-        internal static void AddGuest()
+        IGuestService _guestService;
+        public GuestController(IGuestService guestService)
         {
+            _guestService = guestService;
+        }
+        //Ask the Service for Crud and send back information
+        public void AddGuest()
+        {
+
             var guest = new Guest();
             guest.FirstName = AnsiConsole.Ask<string>("First Name:");
             guest.LastName = AnsiConsole.Ask<string>("Last Name:");
             guest.Email = AnsiConsole.Ask<string>("Email:");
             guest.PhoneNumber = AnsiConsole.Ask<string>("Phonenumber:");
 
+            
+            _guestService.CreateNewGuest(guest);
             //CreateGuestInputValidation(guest); //när ska valideringen ske, hur kopplar man ihop det bra?
         }
 
+        public void GetGuests()
+        {
+            //var guestService = GuestService.GetInstance();
+            //var guests = guestService.ReadAllGuests();
+
+        }
+
+
         //Middle man for inputs and requests? Service <-> Controller <-> Utilities ??
-        public static void CreateGuestInputValidation(Guest newGuest)
+        public void CreateGuestInputValidation(Guest newGuest)
         {
 
             // Skapa validatorn

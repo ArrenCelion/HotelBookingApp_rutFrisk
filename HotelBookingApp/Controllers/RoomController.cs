@@ -13,7 +13,7 @@ using Spectre.Console;
 
 namespace HotelBookingApp.Controllers
 {
-    internal class RoomController
+    public class RoomController
     {
         IRoomService _roomService;
         public RoomController(IRoomService roomService)

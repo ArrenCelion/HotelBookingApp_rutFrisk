@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Models
 {
-    internal class MenuOption
+    public class MenuOption
     {
         public int MenuOptionId { get; set; }
 

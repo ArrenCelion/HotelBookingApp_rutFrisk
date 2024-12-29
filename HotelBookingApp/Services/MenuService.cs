@@ -1,4 +1,5 @@
-﻿using HotelBookingApp.Utilities;
+﻿using HotelBookingApp.Services.ServiceInterfaces;
+using HotelBookingApp.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Services
 {
-    internal class MenuService
+    public class MenuService : IMenuService
     {
 
 
@@ -16,7 +17,7 @@ namespace HotelBookingApp.Services
         public DisplayMenu CreateMainMenu()
         {
             string prompt = "Welcome to the Hotell, what do you wanna check?";
-            string[] options = { "Rooms", "Guests", "Bookings", "Close App" };
+            string[] options = { "Rooms", "Guests", "Bookings", "Close Application" };
             DisplayMenu mainMenu = new DisplayMenu(prompt, options);
 
             return mainMenu;
@@ -25,7 +26,7 @@ namespace HotelBookingApp.Services
         public DisplayMenu CreateRoomMenu()
         {
             string prompt = "Room Menu:";
-            string[] options = { "See all Rooms","Add new Room", "Update Room", "Remove Room", "Back to Main Menu" };
+            string[] options = { "See all Rooms", "Add new Room", "Update Room", "Remove Room", "Back to Main Menu" };
             DisplayMenu roomMenu = new DisplayMenu(prompt, options);
 
             return roomMenu;
