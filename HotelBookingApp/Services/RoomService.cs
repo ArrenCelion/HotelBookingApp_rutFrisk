@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBookingApp.Services.ServiceInterfaces;
 
 namespace HotelBookingApp.Services
 {
-    internal class RoomService
+    public class RoomService : IRoomService
     {
         public void CreateNewRoom()
         {

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Utilities
 {
-    internal class DisplayMenu  //Gör static senare
+    public class DisplayMenu : IDisplayMenu
+    //Gör static senare
     {
         private int SelectedIndex;
         private string[] Options;
@@ -15,12 +16,12 @@ namespace HotelBookingApp.Utilities
 
         public DisplayMenu(string prompt, string[] options)
         {
-            Prompt = prompt;            
+            Prompt = prompt;
             Options = options;
             SelectedIndex = 0;
         }
-        
-        internal void DisplayOptions()
+
+        public void DisplayOptions()
         {
             Console.WriteLine(Prompt);
 

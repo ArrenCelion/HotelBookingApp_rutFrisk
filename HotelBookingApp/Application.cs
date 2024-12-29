@@ -11,13 +11,21 @@ using HotelBookingApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using HotelBookingApp.Services.ServiceInterfaces;
 
 namespace HotelBookingApp
 {
-    internal class App
+    public class Application : IApplication
     {
+        IMenuController _menuController;
+        public Application(IMenuController menuController)
+        {
+            _menuController = menuController;
+        }
         public void Run()
         {
+
+            /* Implementera dbcontext med autofac https://chsamii.medium.com/register-ef-core-with-autofac-2c8cb76d52d6 */
             var builder = new ConfigurationBuilder().AddJsonFile($"appsettings.json", true, true);
             var config = builder.Build();
 
@@ -35,11 +43,7 @@ namespace HotelBookingApp
 
         public void StartMenu()
         {
-            MenuController menuController = new MenuController();
-            MenuService menuService = new MenuService();
-            menuController.RunMainMenu(menuService);
-
-
+            _menuController.RunMainMenu();
         }
     }
 }

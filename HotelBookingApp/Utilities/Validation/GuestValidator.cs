@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingApp.Utilities.Validation
 {
-    internal class GuestValidator : AbstractValidator<Guest>
+    public class GuestValidator : AbstractValidator<Guest>
     {
         public GuestValidator()
         {
