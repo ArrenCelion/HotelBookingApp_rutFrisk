@@ -1,4 +1,5 @@
-﻿using HotelBookingApp.Services;
+﻿using HotelBookingApp.Controllers.ControllerInterfaces;
+using HotelBookingApp.Services;
 using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Utilities;
 using System;

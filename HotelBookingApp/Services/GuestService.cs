@@ -43,10 +43,5 @@ namespace HotelBookingApp.Services
         {
             //Hard Delete - kan bara göras om entiteten är soft deletad
         }
-
-        public void CreateNewGuest()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using HotelBookingApp.Services;
 
-namespace HotelBookingApp.Controllers
+namespace HotelBookingApp.Controllers.ControllerInterfaces
 {
     public interface IMenuController
     {
