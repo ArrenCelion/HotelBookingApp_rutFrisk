@@ -19,14 +19,16 @@ namespace HotelBookingApp
     {
         IMenuController _menuController;
         ApplicationDbContext _dbContext;
-        public Application(IMenuController menuController, ApplicationDbContext dbContext)
+        IDataInitializer _dataInitializer;
+        public Application(IMenuController menuController, ApplicationDbContext dbContext, IDataInitializer dataInitializer)
         {
             _menuController = menuController;
             _dbContext = dbContext;
+            _dataInitializer = dataInitializer;
         }
         public void Run()
         {
-            _dbContext.Database.Migrate();
+            _dataInitializer.MigrateAndSeed();
             StartMenu();
         }
 

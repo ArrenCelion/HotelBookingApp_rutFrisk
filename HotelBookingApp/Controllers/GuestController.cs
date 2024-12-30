@@ -12,6 +12,7 @@ using HotelBookingApp.Data;
 using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Controllers.ControllerInterfaces;
 using HotelBookingApp.Utilities;
+using System.Runtime.CompilerServices;
 
 namespace HotelBookingApp.Controllers
 {
@@ -31,7 +32,7 @@ namespace HotelBookingApp.Controllers
             guest.LastName = AnsiConsole.Ask<string>("Last Name:");
             guest.Email = AnsiConsole.Ask<string>("Email:");
             guest.PhoneNumber = AnsiConsole.Ask<string>("Phonenumber:");
-
+            //fix the rest of the needed information, move out address to it's own table? how to connect them?
             
             _guestService.CreateNewGuest(guest);
             //CreateGuestInputValidation(guest); //när ska valideringen ske, hur kopplar man ihop det bra?
@@ -41,7 +42,6 @@ namespace HotelBookingApp.Controllers
         {
             var allGuests = _guestService.ReadAllGuests();
             DisplayItems.ShowGuestTable(allGuests);
-
         }
 
 
