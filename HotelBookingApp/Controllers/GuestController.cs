@@ -40,8 +40,9 @@ namespace HotelBookingApp.Controllers
 
         public void GetGuests()
         {
+            Console.Clear();
             var allGuests = _guestService.ReadAllGuests();
-            DisplayItems.ShowGuestTable(allGuests);
+            DisplayEntities.ShowGuestTable(allGuests);
         }
 
 

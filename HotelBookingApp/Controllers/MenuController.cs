@@ -14,10 +14,12 @@ namespace HotelBookingApp.Controllers
     {
         IMenuService _menuService;
         IGuestController _guestController;
-        public MenuController(IMenuService menuService, IGuestController guestController)
+        IRoomController _roomController;
+        public MenuController(IMenuService menuService, IGuestController guestController, IRoomController roomController)
         {
             _menuService = menuService;
-            _guestController = guestController; 
+            _guestController = guestController;
+            _roomController = roomController;
         }
         public void RunMainMenu()
         {
@@ -51,10 +53,12 @@ namespace HotelBookingApp.Controllers
             {
                 case 0:
                     Console.WriteLine("List of all rooms");
+                    _roomController.GetRooms();
                     Console.ReadKey();
                     break;
                 case 1:
                     Console.WriteLine("Adding new room");
+                    _roomController.AddRoom();
                     Console.ReadKey();
                     break;
                 case 2:
