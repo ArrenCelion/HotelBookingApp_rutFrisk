@@ -11,6 +11,7 @@ using HotelBookingApp.Services;
 using HotelBookingApp.Data;
 using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Controllers.ControllerInterfaces;
+using HotelBookingApp.Utilities;
 
 namespace HotelBookingApp.Controllers
 {
@@ -38,8 +39,8 @@ namespace HotelBookingApp.Controllers
 
         public void GetGuests()
         {
-            //var guestService = GuestService.GetInstance();
-            //var guests = guestService.ReadAllGuests();
+            var allGuests = _guestService.ReadAllGuests();
+            DisplayItems.ShowGuestTable(allGuests);
 
         }
 

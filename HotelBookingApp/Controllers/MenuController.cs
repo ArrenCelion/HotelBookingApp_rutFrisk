@@ -79,6 +79,7 @@ namespace HotelBookingApp.Controllers
             {
                 case 0:
                     Console.WriteLine("List of all guests");
+                    _guestController.GetGuests();
                     Console.ReadKey();
                     break;
                 case 1:

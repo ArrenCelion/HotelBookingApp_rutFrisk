@@ -6,7 +6,7 @@ namespace HotelBookingApp.Services.ServiceInterfaces
     {
         void CreateNewGuest(Guest guest);
         void DeleteGuest();
-        void ReadAllGuests();
+        List<Guest> ReadAllGuests();
         void RemoveGuest();
         void UpdateGuest();
     }
