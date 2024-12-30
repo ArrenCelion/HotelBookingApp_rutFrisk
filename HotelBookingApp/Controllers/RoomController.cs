@@ -70,5 +70,7 @@ namespace HotelBookingApp.Controllers
             var allRooms = _roomService.ReadAllRooms(); 
             DisplayEntities.ShowRoomTable(allRooms);
         }
+
+        //FIx the rest of crud
     }
 }
