@@ -50,6 +50,11 @@ namespace HotelBookingApp.Utilities
             {
                 if (room.IsActive)
                 {
+                    roomTable.AddRow
+                    (
+                        room.RoomNumber.ToString(),
+                        room.RoomSize.ToString()
+                    );
                     string singleRoom = "Single";
                     string doubleRoom = "Double";
 
