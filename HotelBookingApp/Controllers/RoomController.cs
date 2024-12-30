@@ -66,7 +66,9 @@ namespace HotelBookingApp.Controllers
 
         public void DeleteRoom()
         {
-
+            Console.Clear();
+            var allRooms = _roomService.ReadAllRooms(); 
+            DisplayEntities.ShowRoomTable(allRooms);
         }
     }
 }

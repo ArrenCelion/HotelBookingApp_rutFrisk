@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBookingApp.Data;
+using HotelBookingApp.Models;
 using HotelBookingApp.Services.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBookingApp.Services
 {
