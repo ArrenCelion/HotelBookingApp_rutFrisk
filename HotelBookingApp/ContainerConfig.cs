@@ -23,12 +23,23 @@ namespace HotelBookingApp
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Application>().As<IApplication>();
+            builder.RegisterType<DataInitializer>().As<IDataInitializer>();
+
+            /* Menu */
             builder.RegisterType<MenuController>().As<IMenuController>();
             builder.RegisterType<MenuService>().As<IMenuService>();
             builder.RegisterType<DisplayMenu>().As<IDisplayMenu>();
+
+            /* Guest */
             builder.RegisterType<GuestController>().As<IGuestController>();
             builder.RegisterType<GuestService>().As<IGuestService>();
-            builder.RegisterType<DataInitializer>().As<IDataInitializer>();
+
+            /* Room */
+            builder.RegisterType<RoomController>().As<IRoomController>();
+            builder.RegisterType<RoomService>().As<IRoomService>();
+
+            /* Reservation */
+            
 
 
             /* Implementera dbcontext med autofac https://chsamii.medium.com/register-ef-core-with-autofac-2c8cb76d52d6 */

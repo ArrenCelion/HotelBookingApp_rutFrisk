@@ -1,10 +1,12 @@
-﻿namespace HotelBookingApp.Services.ServiceInterfaces
+﻿using HotelBookingApp.Models;
+
+namespace HotelBookingApp.Services.ServiceInterfaces
 {
     public interface IRoomService
     {
         void CreateNewRoom();
         void DeleteRoom();
-        void ReadAllRooms();
+        List<Room> ReadAllRooms();
         void RemoveRoom();
         void UpdateRoom();
     }
