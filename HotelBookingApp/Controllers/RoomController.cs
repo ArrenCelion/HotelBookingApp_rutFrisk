@@ -24,11 +24,7 @@ namespace HotelBookingApp.Controllers
 
         public void GetRooms()
         {
-            Console.Clear();
-            var allRooms = _roomService.ReadAllRooms(); 
-            DisplayEntities.ShowRoomTable(allRooms);
-        }
 
-        //FIx the rest of crud
+        }
     }
 }
