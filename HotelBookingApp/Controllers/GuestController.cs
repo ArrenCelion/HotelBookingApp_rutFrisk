@@ -10,6 +10,7 @@ using Spectre.Console;
 using HotelBookingApp.Services;
 using HotelBookingApp.Data;
 using HotelBookingApp.Services.ServiceInterfaces;
+using HotelBookingApp.Controllers.ControllerInterfaces;
 
 namespace HotelBookingApp.Controllers
 {

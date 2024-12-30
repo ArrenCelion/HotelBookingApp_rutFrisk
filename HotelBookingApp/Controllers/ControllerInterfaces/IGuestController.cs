@@ -1,6 +1,6 @@
 ﻿using HotelBookingApp.Models;
 
-namespace HotelBookingApp.Controllers
+namespace HotelBookingApp.Controllers.ControllerInterfaces
 {
     public interface IGuestController
     {
