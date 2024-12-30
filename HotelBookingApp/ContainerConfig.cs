@@ -7,7 +7,6 @@ using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using HotelBookingApp.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +28,7 @@ namespace HotelBookingApp
             builder.RegisterType<DisplayMenu>().As<IDisplayMenu>();
             builder.RegisterType<GuestController>().As<IGuestController>();
             builder.RegisterType<GuestService>().As<IGuestService>();
+            builder.RegisterType<DataInitializer>().As<IDataInitializer>();
 
 
             /* Implementera dbcontext med autofac https://chsamii.medium.com/register-ef-core-with-autofac-2c8cb76d52d6 */
