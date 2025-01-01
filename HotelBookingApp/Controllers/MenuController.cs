@@ -51,6 +51,7 @@ namespace HotelBookingApp.Controllers
                     break;
                 case 2:
                     Console.WriteLine("Updating room");
+                    _roomController.UpdateRoom();
                     Console.ReadKey();
                     break;
                 case 3:
