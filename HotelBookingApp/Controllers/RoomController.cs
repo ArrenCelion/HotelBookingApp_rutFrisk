@@ -13,7 +13,7 @@ using Spectre.Console;
 
 namespace HotelBookingApp.Controllers
 {
-    public class RoomController
+    public class RoomController : IRoomController
     {
         IRoomService _roomService;
         public RoomController(IRoomService roomService)
@@ -49,7 +49,7 @@ namespace HotelBookingApp.Controllers
         public void UpdateRoom()
         {
             var room = GetRoomOptionInput();
-            if(AnsiConsole.Confirm("Update Room Number?"))
+            if (AnsiConsole.Confirm("Update Room Number?"))
             {
                 room.RoomNumber = AnsiConsole.Ask<int>("Enter new Room Number:");
             }
@@ -67,7 +67,7 @@ namespace HotelBookingApp.Controllers
         public void DeleteRoom()
         {
             Console.Clear();
-            var allRooms = _roomService.ReadAllRooms(); 
+            var allRooms = _roomService.ReadAllRooms();
             DisplayEntities.ShowRoomTable(allRooms);
         }
 
