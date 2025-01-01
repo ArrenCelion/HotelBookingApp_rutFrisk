@@ -8,7 +8,7 @@ namespace HotelBookingApp.Services.ServiceInterfaces
         void DeleteRoom();
         List<Room> ReadAllRooms();
         Room GetRoomFromID(int roomId);
-        void RemoveRoom();
+        void RemoveRoom(Room room);
         void UpdateRoom(Room room);
     }
 }

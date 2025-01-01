@@ -43,14 +43,17 @@ namespace HotelBookingApp.Services
             _dbContext.SaveChanges();
         }
 
-        public void RemoveRoom()
+        public void RemoveRoom(Room room)
         {
-            //Soft Delete
+            var roomToRemove = _dbContext.Rooms
+                .SingleOrDefault(r => r.RoomId == room.RoomId);
+            roomToRemove.IsActive = room.IsActive;
+            _dbContext.SaveChanges();
         }
 
         public void DeleteRoom()
         {
-            //Hard Delete - kan bara göras om entiteten är soft deletad
+            //Hard Delete - kan bara göras om entiteten är soft deletad?
         }
     }
 }

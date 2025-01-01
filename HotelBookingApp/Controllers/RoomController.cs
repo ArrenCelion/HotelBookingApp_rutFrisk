@@ -64,6 +64,17 @@ namespace HotelBookingApp.Controllers
             _roomService.UpdateRoom(room);
         }
 
+        public void RemoveRoom()
+        {
+            var room = GetRoomOptionInput();
+            if (AnsiConsole.Confirm("Are you sure you want to remove this room?"))
+            {
+               room.IsActive = false;
+            }
+
+            _roomService.RemoveRoom(room);
+        }
+
         public void DeleteRoom()
         {
 
