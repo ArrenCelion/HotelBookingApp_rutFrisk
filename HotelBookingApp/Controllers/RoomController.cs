@@ -37,7 +37,7 @@ namespace HotelBookingApp.Controllers
             var rooms = _roomService.ReadAllRooms();
             var roomsArrayForDisplay = rooms.Select(r => r.RoomNumber.ToString()).ToArray();
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Choose Room to update")
+                .Title("Choose Room")
                 .AddChoices(roomsArrayForDisplay));
 
             var id = rooms.Single(x => x.RoomNumber.ToString() == option).RoomId;
@@ -66,9 +66,7 @@ namespace HotelBookingApp.Controllers
 
         public void DeleteRoom()
         {
-            Console.Clear();
-            var allRooms = _roomService.ReadAllRooms();
-            DisplayEntities.ShowRoomTable(allRooms);
+
         }
 
         //FIx the rest of crud
