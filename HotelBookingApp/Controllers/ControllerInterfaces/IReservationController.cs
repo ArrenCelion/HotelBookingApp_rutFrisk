@@ -4,6 +4,8 @@
     {
         void AddReservation();
         void GetActiveReservations();
+        void GetInactiveReservations();
+        void RemoveReservation();
 
     }
 }

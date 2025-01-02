@@ -26,19 +26,30 @@ namespace HotelBookingApp.Services
             return _dbContext.Reservations.Where(r => r.IsActive == true).ToList();
         }
 
+        public List<Reservation> ReadInactiveReservations()
+        {
+            return _dbContext.Reservations.Where(r => r.IsActive == false).ToList();
+        }
+
         public void UpdateReservation()
         {
 
         }
-
-        public void RemoveReservation()
+       public Reservation GetReservationFromID(int reservationId)
         {
-            //Soft Delete
+            return _dbContext.Reservations.SingleOrDefault(r => r.ReservationId == reservationId);
+        }
+        public void RemoveReservation(Reservation reservation)
+        {
+            var reservationToRemove = _dbContext.Reservations
+                .SingleOrDefault(r => r.ReservationId == reservation.ReservationId);
+            reservationToRemove.IsActive = reservation.IsActive;
         }
 
-        public void DeleteReservation()
+        public void DeleteReservation(Reservation reservation)
         {
-            //Hard Delete - kan bara göras om entiteten är soft deletad
+            _dbContext.Remove(reservation);
+            _dbContext.SaveChanges();
         }
     }
 }
