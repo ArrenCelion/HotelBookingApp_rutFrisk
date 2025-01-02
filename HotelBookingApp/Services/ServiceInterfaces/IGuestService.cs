@@ -5,9 +5,12 @@ namespace HotelBookingApp.Services.ServiceInterfaces
     public interface IGuestService
     {
         void CreateNewGuest(Guest guest);
-        void DeleteGuest();
+        void HardDeleteGuest(Guest guest);
+        Guest GetGuestFromID(int guestId);
         List<Guest> ReadAllGuests();
-        void RemoveGuest();
-        void UpdateGuest();
+        List<Guest> ReadActiveGuests();
+        List<Guest> ReadInActiveGuests();
+        void RemoveGuest(Guest guest);
+        void UpdateGuest(Guest guest);
     }
 }

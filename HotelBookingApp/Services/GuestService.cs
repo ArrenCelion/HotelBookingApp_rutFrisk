@@ -29,18 +29,41 @@ namespace HotelBookingApp.Services
         {
             return _dbContext.Guests.ToList();
         }
-
-        public void UpdateGuest()
+        public List<Guest> ReadInActiveGuests()
         {
+            return _dbContext.Guests.Where(g => g.IsActive == false).ToList();
+        }
+        public List<Guest> ReadActiveGuests()
+        {
+            return _dbContext.Guests.Where(g => g.IsActive == true).ToList();
+        }
+        public Guest GetGuestFromID(int guestId)
+        {
+            return _dbContext.Guests.SingleOrDefault(g => g.GuestId == guestId);
+        }
+        public void UpdateGuest(Guest guest)
+        {
+            var guestToUpdate = _dbContext.Guests
+                .SingleOrDefault(g => g.GuestId == guest.GuestId);
+            guestToUpdate.FirstName = guest.FirstName;
+            guestToUpdate.LastName = guest.LastName;
+            guestToUpdate.Email = guest.Email;
+            guestToUpdate.PhoneNumber = guest.PhoneNumber;
+            guestToUpdate.DateOfBirth = guest.DateOfBirth;
+            guestToUpdate.Address = guest.Address;
+            guestToUpdate.PostalCode = guest.PostalCode;
+            guestToUpdate.City = guest.City;
+            guestToUpdate.IsActive = guest.IsActive;
+            _dbContext.SaveChanges();
 
         }
 
-        public void RemoveGuest()
+        public void RemoveGuest(Guest guest)
         {
             //Soft Delete
         }
 
-        public void DeleteGuest()
+        public void HardDeleteGuest(Guest guest)
         {
             //Hard Delete - kan bara göras om entiteten är soft deletad
         }

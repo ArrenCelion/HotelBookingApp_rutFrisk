@@ -95,7 +95,7 @@ namespace HotelBookingApp.Controllers
             {
                 case 0:
                     Console.WriteLine("List of all guests");
-                    _guestController.GetGuests();
+                    _guestController.GetActiveGuests();
                     Console.ReadKey();
                     break;
                 case 1:
@@ -105,13 +105,25 @@ namespace HotelBookingApp.Controllers
                     break;
                 case 2:
                     Console.WriteLine("Updating guest");
+                    _guestController.UpdateGuest();
                     Console.ReadKey();
                     break;
                 case 3:
                     Console.WriteLine("Removing guest");
+                    _guestController.RemoveGuest();
                     Console.ReadKey();
                     break;
                 case 4:
+                    Console.WriteLine("List of all inactive guests");
+                    _guestController.GetInactiveGuests();
+                    Console.ReadKey();
+                    break;
+                case 5:
+                    Console.WriteLine("Delete a guest");
+                    _guestController.DeleteGuest();
+                    Console.ReadKey();
+                    break;
+                case 6:
                     RunMainMenu();
                     break;
             }

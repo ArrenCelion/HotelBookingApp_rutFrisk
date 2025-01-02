@@ -25,10 +25,9 @@ namespace HotelBookingApp.Controllers
         {
             _guestService = guestService;
         }
-        //Ask the Service for Crud and send back information
         public void AddGuest()
         {
-
+            //Fix validation in utilities later
             string firstName = AnsiConsole.Ask<string>("First Name:");
             string lastName = AnsiConsole.Ask<string>("Last Name:");
             string email = AnsiConsole.Ask<string>("Email:");
@@ -81,20 +80,92 @@ namespace HotelBookingApp.Controllers
                 Console.ReadKey();
                 //_menuController.RunGuestMenu();
             }
-
-
-            //fix the rest of the needed information, move out address to it's own table? how to connect them?
-
-            
-            //CreateGuestInputValidation(guest); //när ska valideringen ske, hur kopplar man ihop det bra?
         }
-
-        public void GetGuests()
+        public Guest GetGuestOptionInput(List<Guest> guests)
         {
-            Console.Clear();
-            var allGuests = _guestService.ReadAllGuests();
-            DisplayEntities.ShowGuestTable(allGuests);
+            var guestArrayForDisplay = guests.Select(g => g.FirstName +" "+ g.LastName).ToArray();
+            var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("Choose Guest")
+                .AddChoices(guestArrayForDisplay));
+
+            var id = guests.Single(x => x.FirstName +" "+ x.LastName == option).GuestId;
+            var guest = _guestService.GetGuestFromID(id);
+
+            return guest;
         }
+
+        public void GetActiveGuests()
+        {
+            var activeGuests = _guestService.ReadActiveGuests();
+            DisplayEntities.ShowGuestTable(activeGuests);
+        }
+
+        public void GetInactiveGuests()
+        {
+            var inactiveGuests = _guestService.ReadInActiveGuests();
+            DisplayEntities.ShowGuestTable(inactiveGuests);
+        }
+
+        public void UpdateGuest()
+        {
+            var allGuests = _guestService.ReadAllGuests();
+            var guest = GetGuestOptionInput(allGuests);
+
+            if (AnsiConsole.Confirm("Update First Name?"))
+            {
+                guest.FirstName = AnsiConsole.Ask<string>("Enter new First Name:");
+            }
+            if (AnsiConsole.Confirm("Update Last Name?"))
+            {
+                guest.LastName = AnsiConsole.Ask<string>("Enter new Last Name:");
+            }
+            if(AnsiConsole.Confirm("Update Email?"))
+            {
+                guest.Email = AnsiConsole.Ask<string>("Enter new Email:");
+            }
+            if (AnsiConsole.Confirm("Update Phone Number?"))
+            {
+                guest.PhoneNumber = AnsiConsole.Ask<string>("Enter new Phone Number:");
+            }
+            if (AnsiConsole.Confirm("Update Date of Birth?"))
+            {
+                guest.DateOfBirth = AnsiConsole.Ask<DateTime>("Enter new Date of Birth:");
+            }
+            if (AnsiConsole.Confirm("Update Address?"))
+            {
+                guest.Address = AnsiConsole.Ask<string>("Enter new Address:");
+            }
+            if (AnsiConsole.Confirm("Update Postal Code?"))
+            {
+                guest.PostalCode = AnsiConsole.Ask<string>("Enter new Postal Code:");
+            }
+            if (AnsiConsole.Confirm("Update City?"))
+            {
+                guest.City = AnsiConsole.Ask<string>("Enter new City:");
+            }
+            if (AnsiConsole.Confirm("Update Active status?"))
+            {
+                guest.IsActive = AnsiConsole.Confirm("Is the guest active?");
+            }
+            _guestService.UpdateGuest(guest);
+        }
+
+        public void RemoveGuest()
+        {
+
+        }
+        
+        public void DeleteGuest()
+        {
+            
+        }   
+
+
+
+
+
+
+
 
 
         //Middle man for inputs and requests? Service <-> Controller <-> Utilities ??
