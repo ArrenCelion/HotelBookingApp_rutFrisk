@@ -5,7 +5,7 @@ namespace HotelBookingApp.Services.ServiceInterfaces
     public interface IReservationService
     {
         void CreateNewReservation();
-        void DeleteReservation(Reservation reservation);
+        void HardDeleteReservation(Reservation reservation);
         List<Reservation> ReadActiveReservations();
         List<Reservation> ReadInactiveReservations();
         Reservation GetReservationFromID(int reservationId);

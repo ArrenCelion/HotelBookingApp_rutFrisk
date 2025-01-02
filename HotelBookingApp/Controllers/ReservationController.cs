@@ -69,5 +69,17 @@ namespace HotelBookingApp.Controllers
             }
             _reservationService.RemoveReservation(reservation);
         }
+
+        public void DeleteReservation()
+        {
+            var inactiveReservations = _reservationService.ReadInactiveReservations();
+            var reservation = GetReservationOptionInput(inactiveReservations);
+            if (reservation == null)
+                return;
+            if (AnsiConsole.Confirm("Are you sure you want to delete this reservation? This will permanently delete the reservation from the database and it will not be recoverable."))
+            {
+                _reservationService.HardDeleteReservation(reservation);
+            }
+        }
     }
 }

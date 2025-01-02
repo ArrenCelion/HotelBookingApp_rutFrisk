@@ -46,7 +46,7 @@ namespace HotelBookingApp.Services
             reservationToRemove.IsActive = reservation.IsActive;
         }
 
-        public void DeleteReservation(Reservation reservation)
+        public void HardDeleteReservation(Reservation reservation)
         {
             _dbContext.Remove(reservation);
             _dbContext.SaveChanges();

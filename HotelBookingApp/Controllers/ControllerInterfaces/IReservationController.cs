@@ -6,6 +6,7 @@
         void GetActiveReservations();
         void GetInactiveReservations();
         void RemoveReservation();
+        void DeleteReservation();
 
     }
 }
