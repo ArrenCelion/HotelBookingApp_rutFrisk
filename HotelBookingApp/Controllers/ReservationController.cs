@@ -14,7 +14,7 @@ namespace HotelBookingApp.Controllers
     public class ReservationController : IReservationController
     {
         IReservationService _reservationService;
-        public ReservationController(IReservationService reservationService) 
+        public ReservationController(IReservationService reservationService)
         {
             _reservationService = reservationService;
         }
@@ -27,14 +27,19 @@ namespace HotelBookingApp.Controllers
         public Reservation GetReservationOptionInput(List<Reservation> reservations)
         {
             var reservationArrayToDisplay = reservations.Select(r => r.ReservationId.ToString()).ToArray();
-            var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                    .Title("Select a reservation")
-                    .AddChoices(reservationArrayToDisplay));
+            if (reservationArrayToDisplay.Length != 0)
+            {
+                var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                            .Title("Select a reservation")
+                            .AddChoices(reservationArrayToDisplay));
 
-            var id = reservations.Single(r => r.ReservationId.ToString() == option).ReservationId;
-            var reservation = _reservationService.GetReservationFromID(id);
+                var id = reservations.Single(r => r.ReservationId.ToString() == option).ReservationId;
+                var reservation = _reservationService.GetReservationFromID(id);
 
-            return reservation;
+                return reservation;
+            }
+            else Console.WriteLine("No Reservation found");
+            return null;
 
         }
         public void GetActiveReservations()
@@ -54,6 +59,10 @@ namespace HotelBookingApp.Controllers
         {
             var activeReservations = _reservationService.ReadActiveReservations();
             var reservation = GetReservationOptionInput(activeReservations);
+
+            if (reservation == null)
+                return;
+
             if (AnsiConsole.Confirm("Are you sure you want to remove this reservation?"))
             {
                 reservation.IsActive = false;

@@ -157,6 +157,7 @@ namespace HotelBookingApp.Controllers
                     break;
                 case 3:
                     Console.WriteLine("Removing booking");
+                    _reservationController.RemoveReservation();
                     Console.ReadKey();
                     break;
                 case 4:
