@@ -32,10 +32,11 @@ namespace HotelBookingApp.Controllers
             string lastName = AnsiConsole.Ask<string>("Last Name:");
             string email = AnsiConsole.Ask<string>("Email:");
             string phoneNumber = AnsiConsole.Ask<string>("Phonenumber:");
-            DateTime dateOfBirth = AnsiConsole.Ask<DateTime>("Date of Birth:");
+            DateTime dateOfBirth = AnsiConsole.Ask<DateTime>("Date of Birth (dd/MM/yyyy):"); //FIx year validation important!!!
             string address = AnsiConsole.Ask<string>("Address:");
             string postalCode = AnsiConsole.Ask<string>("Postal Code:");
             string city = AnsiConsole.Ask<string>("City:");
+            bool isActive = true;
 
 
             Console.Clear();
@@ -46,7 +47,7 @@ namespace HotelBookingApp.Controllers
             table.AddRow("Name", firstName + " " + lastName);
             table.AddRow("Email", email);
             table.AddRow("Phone number", phoneNumber);
-            table.AddRow("Date of Birth", dateOfBirth.ToString());
+            table.AddRow("Date of Birth", dateOfBirth.ToShortDateString());
             table.AddRow("Address", address);
             table.AddRow("Zip Code", postalCode);
             table.AddRow("City", city);
@@ -68,6 +69,7 @@ namespace HotelBookingApp.Controllers
                 guest.Address = address;
                 guest.PostalCode = postalCode;
                 guest.City = city;
+                guest.IsActive = isActive;
                 _guestService.CreateNewGuest(guest);
                 Console.ReadKey();
                 Console.WriteLine("Press any key to return to previous menu");
@@ -105,7 +107,17 @@ namespace HotelBookingApp.Controllers
             var inactiveGuests = _guestService.ReadInActiveGuests();
             DisplayEntities.ShowGuestTable(inactiveGuests);
         }
-
+        public void SearchGuest()
+        {
+            int guestId = AnsiConsole.Ask<int>("Enter Guest ID:");
+            var guest = _guestService.GetGuestFromID(guestId);
+            if (guest == null)
+            {
+                Console.WriteLine("Guest not found.");
+                return;
+            }
+            DisplayEntities.ShowGuestTable(new List<Guest> { guest });
+        }
         public void UpdateGuest()
         {
             var allGuests = _guestService.ReadAllGuests();

@@ -19,6 +19,7 @@ namespace HotelBookingApp.Utilities
             guestTable.AddColumn("Last Name");
             guestTable.AddColumn("Email");
             guestTable.AddColumn("Phone Number");
+            guestTable.AddColumn("Date of Birth (yyyy/MM/dd)");
 
             foreach (Guest guest in guests)
             {
@@ -26,7 +27,8 @@ namespace HotelBookingApp.Utilities
                     guest.FirstName,
                     guest.LastName,
                     guest.Email,
-                    guest.PhoneNumber
+                    guest.PhoneNumber,
+                    guest.DateOfBirth.ToShortDateString()
                     );
             }
 

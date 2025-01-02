@@ -99,31 +99,35 @@ namespace HotelBookingApp.Controllers
                     Console.ReadKey();
                     break;
                 case 1:
+                    Console.WriteLine("Search for a guest with Id");
+                    _guestController.SearchGuest();
+                    break;
+                case 2:
                     Console.WriteLine("Adding new guest");
                     _guestController.AddGuest();
                     Console.ReadKey();
                     break;
-                case 2:
+                case 3:
                     Console.WriteLine("Updating guest");
                     _guestController.UpdateGuest();
                     Console.ReadKey();
                     break;
-                case 3:
+                case 4:
                     Console.WriteLine("Removing guest");
                     _guestController.RemoveGuest();
                     Console.ReadKey();
                     break;
-                case 4:
+                case 5:
                     Console.WriteLine("List of all inactive guests");
                     _guestController.GetInactiveGuests();
                     Console.ReadKey();
                     break;
-                case 5:
+                case 6:
                     Console.WriteLine("Delete a guest");
                     _guestController.DeleteGuest();
                     Console.ReadKey();
                     break;
-                case 6:
+                case 7:
                     RunMainMenu();
                     break;
             }

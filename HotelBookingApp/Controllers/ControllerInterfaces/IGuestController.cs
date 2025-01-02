@@ -11,6 +11,7 @@ namespace HotelBookingApp.Controllers.ControllerInterfaces
         Guest GetGuestOptionInput(List<Guest> guests);
         void GetActiveGuests();
         void GetInactiveGuests();
+        void SearchGuest();
         void CreateGuestInputValidation(Guest newGuest);
     }
 }
