@@ -85,7 +85,7 @@ namespace HotelBookingApp.Data
                     .RuleFor(g => g.Address, f => f.Address.StreetAddress())
                     .RuleFor(g => g.PostalCode, f => f.Address.ZipCode())
                     .RuleFor(g => g.City, f => f.Address.City())
-                    .RuleFor(g => g.IsActive, f => f.Random.Bool(0.9f));
+                    .RuleFor(g => g.IsActive, f => f.Random.Bool(0.1f));
 
                 guestFaker.Generate(10).ForEach(g => _dbContext.Add(g));
             }
