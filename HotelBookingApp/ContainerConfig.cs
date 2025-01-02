@@ -39,8 +39,8 @@ namespace HotelBookingApp
             builder.RegisterType<RoomService>().As<IRoomService>();
 
             /* Reservation */
-            
-
+            builder.RegisterType<ReservationController>().As<IReservationController>();
+            builder.RegisterType<ReservationService>().As<IReservationService>();
 
             /* Implementera dbcontext med autofac https://chsamii.medium.com/register-ef-core-with-autofac-2c8cb76d52d6 */
             var dbBuilder = new ConfigurationBuilder().AddJsonFile($"appsettings.json", true, true);
