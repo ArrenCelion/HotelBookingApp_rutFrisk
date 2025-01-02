@@ -22,19 +22,45 @@ namespace HotelBookingApp.Controllers
         }
         public void AddRoom()
         {
-            _roomService.CreateNewRoom();
+            var room = new Room();
+            room.RoomNumber = AnsiConsole.Ask<int>("Room number:"); //Add validation that the roomnumber isn't already in use?
+            room.RoomSize = AnsiConsole.Ask<int>("Room Size:");
+            if (AnsiConsole.Confirm("Is it a Single Room?"))
+            {
+                room.IsSingle = true;
+            }
+            else
+            {
+                 room.IsSingle = false;
+            }
+            if (AnsiConsole.Confirm("Should the room be active and bookable right away?"))
+            {
+                room.IsActive = true;
+            }
+            else
+            {
+                room.IsActive = false;
+            }
+
+            _roomService.CreateNewRoom(room);
         }
 
-        public void GetRooms()
+        public void GetActiveRooms()
         {
             Console.Clear();
-            var allRooms = _roomService.ReadAllRooms();
-            DisplayEntities.ShowRoomTable(allRooms);
+            var activeRooms = _roomService.ReadActiveRooms();
+            DisplayEntities.ShowRoomTable(activeRooms);
         }
 
-        public Room GetRoomOptionInput()
+        public void GetInactiveRooms()
         {
-            var rooms = _roomService.ReadAllRooms();
+            Console.Clear();
+            var inactiveRooms = _roomService.ReadInActiveRooms();
+            DisplayEntities.ShowRoomTable(inactiveRooms);
+        }
+
+        public Room GetRoomOptionInput(List<Room> rooms)
+        {
             var roomsArrayForDisplay = rooms.Select(r => r.RoomNumber.ToString()).ToArray();
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Choose Room")
@@ -48,7 +74,8 @@ namespace HotelBookingApp.Controllers
 
         public void UpdateRoom()
         {
-            var room = GetRoomOptionInput();
+            var allRooms = _roomService.ReadAllRooms();
+            var room = GetRoomOptionInput(allRooms);
             if (AnsiConsole.Confirm("Update Room Number?"))
             {
                 room.RoomNumber = AnsiConsole.Ask<int>("Enter new Room Number:");
@@ -61,13 +88,18 @@ namespace HotelBookingApp.Controllers
             {
                 room.IsSingle = AnsiConsole.Confirm("Is the room a single room?");
             }
+            if (AnsiConsole.Confirm("Update Room Status?"))
+            {
+                room.IsActive = AnsiConsole.Confirm("Is the room active and bookable?");
+            }
             _roomService.UpdateRoom(room);
         }
 
         public void RemoveRoom()
         {
-            var room = GetRoomOptionInput();
-            if (AnsiConsole.Confirm("Are you sure you want to remove this room?"))
+            var activeRooms = _roomService.ReadActiveRooms();
+            var room = GetRoomOptionInput(activeRooms);
+            if (AnsiConsole.Confirm("Are you sure you want to remove this room? This will inactivate the room so that it's not bookable"))
             {
                room.IsActive = false;
             }
@@ -77,9 +109,13 @@ namespace HotelBookingApp.Controllers
 
         public void DeleteRoom()
         {
+            var inactiveRooms = _roomService.ReadInActiveRooms();
+            var room = GetRoomOptionInput(inactiveRooms);
+            if (AnsiConsole.Confirm("Are you sure you want to delete this room? This will permanently delete the room from the database and it will not be recoverable."))
+            {
+                _roomService.HardDeleteRoom(room);
+            }
 
         }
-
-        //FIx the rest of crud
     }
 }

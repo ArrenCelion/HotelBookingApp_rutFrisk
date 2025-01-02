@@ -48,8 +48,6 @@ namespace HotelBookingApp.Utilities
 
             foreach (Room room in rooms)
             {
-                if (room.IsActive)
-                {
                     string singleRoom = "Single";
                     string doubleRoom = "Double";
 
@@ -69,8 +67,6 @@ namespace HotelBookingApp.Utilities
                             doubleRoom
                             );
                     }
-                }
-                else continue;
             }
 
             AnsiConsole.Write(roomTable);

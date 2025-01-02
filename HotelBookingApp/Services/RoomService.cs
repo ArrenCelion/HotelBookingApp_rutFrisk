@@ -17,9 +17,10 @@ namespace HotelBookingApp.Services
         {
             _dbContext = dbContext;
         }
-        public void CreateNewRoom()
+        public void CreateNewRoom(Room room)
         {
-
+            _dbContext.Rooms.Add(room);
+            _dbContext.SaveChanges();
         }
 
         public List<Room> ReadAllRooms()
@@ -40,6 +41,7 @@ namespace HotelBookingApp.Services
             roomToUpdate.RoomNumber = room.RoomNumber;
             roomToUpdate.RoomSize = room.RoomSize;
             roomToUpdate.IsSingle = room.IsSingle;
+            roomToUpdate.IsActive = room.IsActive;
             _dbContext.SaveChanges();
         }
 
@@ -51,9 +53,20 @@ namespace HotelBookingApp.Services
             _dbContext.SaveChanges();
         }
 
-        public void DeleteRoom()
+        public List<Room> ReadInActiveRooms()
         {
-            //Hard Delete - kan bara göras om entiteten är soft deletad?
+            return _dbContext.Rooms.Where(r => r.IsActive == false).ToList();
+        }
+
+        public List<Room> ReadActiveRooms()
+        {
+            return _dbContext.Rooms.Where(r => r.IsActive == true).ToList();
+        }
+
+        public void HardDeleteRoom(Room room)
+        {
+            _dbContext.Remove(room);
+            _dbContext.SaveChanges();
         }
     }
 }

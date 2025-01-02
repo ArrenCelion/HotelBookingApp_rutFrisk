@@ -26,7 +26,7 @@ namespace HotelBookingApp.Services
         public DisplayMenu CreateRoomMenu()
         {
             string prompt = "Room Menu:";
-            string[] options = { "See all Rooms", "Add new Room", "Update Room", "Remove Room", "Back to Main Menu" };
+            string[] options = { "See all Rooms", "Add new Room", "Update Room", "Remove Room", "See all removed rooms", "Delete Room", "Back to Main Menu" };
             DisplayMenu roomMenu = new DisplayMenu(prompt, options);
 
             return roomMenu;

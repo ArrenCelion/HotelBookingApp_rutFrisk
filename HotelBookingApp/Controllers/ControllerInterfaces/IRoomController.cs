@@ -6,8 +6,10 @@ namespace HotelBookingApp.Controllers.ControllerInterfaces
     {
         void AddRoom();
         void DeleteRoom();
-        Room GetRoomOptionInput();
-        void GetRooms();
+        Room GetRoomOptionInput(List<Room> rooms);
+        void GetActiveRooms();
         void UpdateRoom();
+        void RemoveRoom();
+        void GetInactiveRooms();
     }
 }

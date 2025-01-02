@@ -53,24 +53,35 @@ namespace HotelBookingApp.Controllers
             {
                 case 0:
                     Console.WriteLine("List of all rooms");
-                    _roomController.GetRooms();
+                    _roomController.GetActiveRooms();
                     Console.ReadKey();
                     break;
                 case 1:
-                    Console.WriteLine("Adding new room");
+                    Console.WriteLine("Add new room");
                     _roomController.AddRoom();
                     Console.ReadKey();
                     break;
                 case 2:
-                    Console.WriteLine("Updating room");
+                    Console.WriteLine("Update room");
                     _roomController.UpdateRoom();
                     Console.ReadKey();
                     break;
                 case 3:
-                    Console.WriteLine("Removing room");
+                    Console.WriteLine("Remove room");
+                    _roomController.RemoveRoom();
                     Console.ReadKey();
                     break;
                 case 4:
+                    Console.WriteLine("List of all inactive rooms");
+                    _roomController.GetInactiveRooms();
+                    Console.ReadKey();
+                    break;
+                case 5:
+                    Console.WriteLine("Delete a room");
+                    _roomController.DeleteRoom();
+                    Console.ReadKey();
+                    break;
+                case 6:
                     RunMainMenu();
                     break;
             }
