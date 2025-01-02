@@ -154,7 +154,7 @@ namespace HotelBookingApp.Controllers
         {
             var activeGuests = _guestService.ReadActiveGuests();
             var guest = GetGuestOptionInput(activeGuests);
-            if (AnsiConsole.Confirm("Are you sure you want to remove this guest?"))
+            if (AnsiConsole.Confirm("Are you sure you want to remove this guest? This will inactivate the guest so they can no longer make reservations"))
             {
                 guest.IsActive = false;
             }
@@ -163,7 +163,13 @@ namespace HotelBookingApp.Controllers
         
         public void DeleteGuest()
         {
-            
+            var inactiveGuests = _guestService.ReadInActiveGuests();
+            var guest = GetGuestOptionInput(inactiveGuests);
+            if (AnsiConsole.Confirm("Are you sure you want to delete this guest? This will permanently delete the guest from the database and it will not be recoverable."))
+            {
+                _guestService.HardDeleteGuest(guest);
+            }
+
         }   
 
 

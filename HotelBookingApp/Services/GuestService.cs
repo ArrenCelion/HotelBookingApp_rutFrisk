@@ -68,7 +68,8 @@ namespace HotelBookingApp.Services
 
         public void HardDeleteGuest(Guest guest)
         {
-            //Hard Delete - kan bara göras om entiteten är soft deletad
+            _dbContext.Remove(guest);
+            _dbContext.SaveChanges();
         }
     }
 }
