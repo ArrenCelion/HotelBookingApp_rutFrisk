@@ -15,11 +15,13 @@ namespace HotelBookingApp.Controllers
         IMenuService _menuService;
         IGuestController _guestController;
         IRoomController _roomController;
-        public MenuController(IMenuService menuService, IGuestController guestController, IRoomController roomController)
+        IReservationController _reservationController;
+        public MenuController(IMenuService menuService, IGuestController guestController, IRoomController roomController, IReservationController reservationController)
         {
             _menuService = menuService;
             _guestController = guestController;
             _roomController = roomController;
+            _reservationController = reservationController;
         }
         public void RunMainMenu()
         {
@@ -141,7 +143,8 @@ namespace HotelBookingApp.Controllers
             switch (selectedIndex)
             {
                 case 0:
-                    Console.WriteLine("List of all bookings");
+                    Console.WriteLine("List of all Reservations");
+                    _reservationController.GetActiveReservations();
                     Console.ReadKey();
                     break;
                 case 1:

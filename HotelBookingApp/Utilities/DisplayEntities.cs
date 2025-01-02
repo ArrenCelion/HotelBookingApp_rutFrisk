@@ -50,25 +50,25 @@ namespace HotelBookingApp.Utilities
 
             foreach (Room room in rooms)
             {
-                    string singleRoom = "Single";
-                    string doubleRoom = "Double";
+                string singleRoom = "Single";
+                string doubleRoom = "Double";
 
-                    if (room.IsSingle)
-                    {
-                        roomTable.AddRow(
-                            room.RoomNumber.ToString(),
-                            room.RoomSize.ToString(),
-                            singleRoom
-                            );
-                    }
-                    else
-                    {
-                        roomTable.AddRow(
-                            room.RoomNumber.ToString(),
-                            room.RoomSize.ToString(),
-                            doubleRoom
-                            );
-                    }
+                if (room.IsSingle)
+                {
+                    roomTable.AddRow(
+                        room.RoomNumber.ToString(),
+                        room.RoomSize.ToString(),
+                        singleRoom
+                        );
+                }
+                else
+                {
+                    roomTable.AddRow(
+                        room.RoomNumber.ToString(),
+                        room.RoomSize.ToString(),
+                        doubleRoom
+                        );
+                }
             }
 
             AnsiConsole.Write(roomTable);
@@ -78,6 +78,32 @@ namespace HotelBookingApp.Utilities
             Console.Clear();
             //_menuController.RunGuestMenu(); How to return to previous menu??
 
+        }
+
+        public static void ShowReservationTable(List<Reservation> reservations)
+        {
+            var reservationsTable = new Table();
+            reservationsTable.AddColumn("Reservation Number");
+            reservationsTable.AddColumn("Guest");
+            reservationsTable.AddColumn("Room");
+            reservationsTable.AddColumn("Arrival Date");
+            reservationsTable.AddColumn("Length of stay (nights)");
+
+            foreach (Reservation reservation in reservations)
+            {
+                reservationsTable.AddRow(
+                    reservation.ReservationId.ToString(),
+                    reservation.Guest.LastName + ", " + reservation.Guest.FirstName,
+                    reservation.Room.RoomNumber.ToString(),
+                    reservation.ArrivalDate.ToShortDateString(),
+                    reservation.LengthOfStay.ToString()
+                    );
+            }
+            AnsiConsole.Write(reservationsTable);
+
+            Console.WriteLine("Press any key to go back");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }

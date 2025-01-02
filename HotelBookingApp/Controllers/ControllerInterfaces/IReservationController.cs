@@ -3,6 +3,7 @@
     public interface IReservationController
     {
         void AddReservation();
-        void GetReservations();
+        void GetActiveReservations();
+
     }
 }
