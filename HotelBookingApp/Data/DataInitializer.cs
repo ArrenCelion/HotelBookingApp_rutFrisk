@@ -1,4 +1,5 @@
-﻿using HotelBookingApp.Data;
+﻿using Bogus;
+using HotelBookingApp.Data;
 using HotelBookingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,7 +20,7 @@ namespace HotelBookingApp.Data
         public void MigrateAndSeed()
         {
             _dbContext.Database.Migrate();
-            //SeedGuests();
+            SeedGuests();
             SeedRooms();
             _dbContext.SaveChanges();
         }
@@ -73,8 +74,21 @@ namespace HotelBookingApp.Data
 
         private void SeedGuests()
         {
-            //Använda bogus?
+            if (!_dbContext.Guests.Any(g => g.GuestId == 10))
+            {
+                var guestFaker = new Faker<Guest>()
+                    .RuleFor(g => g.FirstName, f => f.Name.FirstName())
+                    .RuleFor(g => g.LastName, f => f.Name.LastName())
+                    .RuleFor(g => g.Email, f => f.Internet.Email())
+                    .RuleFor(g => g.PhoneNumber, f => f.Phone.PhoneNumber())
+                    .RuleFor(g => g.DateOfBirth, f => f.Date.Past(100, DateTime.Now.AddYears(-18)))
+                    .RuleFor(g => g.Address, f => f.Address.StreetAddress())
+                    .RuleFor(g => g.PostalCode, f => f.Address.ZipCode())
+                    .RuleFor(g => g.City, f => f.Address.City())
+                    .RuleFor(g => g.IsActive, f => f.Random.Bool(0.9f));
 
+                guestFaker.Generate(10).ForEach(g => _dbContext.Add(g));
+            }
         }
 
 
