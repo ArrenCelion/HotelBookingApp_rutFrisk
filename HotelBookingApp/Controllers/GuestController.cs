@@ -152,7 +152,13 @@ namespace HotelBookingApp.Controllers
 
         public void RemoveGuest()
         {
-
+            var activeGuests = _guestService.ReadActiveGuests();
+            var guest = GetGuestOptionInput(activeGuests);
+            if (AnsiConsole.Confirm("Are you sure you want to remove this guest?"))
+            {
+                guest.IsActive = false;
+            }
+            _guestService.RemoveGuest(guest);
         }
         
         public void DeleteGuest()

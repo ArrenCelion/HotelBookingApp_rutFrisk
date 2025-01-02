@@ -60,7 +60,10 @@ namespace HotelBookingApp.Services
 
         public void RemoveGuest(Guest guest)
         {
-            //Soft Delete
+            var guestToRemove = _dbContext.Guests
+                .SingleOrDefault(g => g.GuestId == guest.GuestId);
+            guestToRemove.IsActive = guest.IsActive;
+            _dbContext.SaveChanges();
         }
 
         public void HardDeleteGuest(Guest guest)
