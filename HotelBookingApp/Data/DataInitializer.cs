@@ -76,11 +76,12 @@ namespace HotelBookingApp.Data
         {
             if (!_dbContext.Guests.Any(g => g.GuestId == 10))
             {
-                var guestFaker = new Faker<Guest>()
+
+                var guestFaker = new Faker<Guest>("sv") //Trodde det skulle hjälpa att få telefonnummer som startar med 0 om man ändrade locale men det verkar köra på gamla riktnummer systemet istället för mobilnummer
                     .RuleFor(g => g.FirstName, f => f.Name.FirstName())
                     .RuleFor(g => g.LastName, f => f.Name.LastName())
                     .RuleFor(g => g.Email, f => f.Internet.Email())
-                    .RuleFor(g => g.PhoneNumber, f => f.Phone.PhoneNumber())
+                    .RuleFor(g => g.PhoneNumber, f => f.Phone.PhoneNumberFormat())
                     .RuleFor(g => g.DateOfBirth, f => f.Date.Past(100, DateTime.Now.AddYears(-18)))
                     .RuleFor(g => g.Address, f => f.Address.StreetAddress())
                     .RuleFor(g => g.PostalCode, f => f.Address.ZipCode())
