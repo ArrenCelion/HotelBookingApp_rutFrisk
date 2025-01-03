@@ -56,32 +56,38 @@ namespace HotelBookingApp.Controllers
                 case 0:
                     Console.WriteLine("List of all rooms");
                     _roomController.GetActiveRooms();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 1:
                     Console.WriteLine("Add new room");
                     _roomController.AddRoom();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 2:
                     Console.WriteLine("Update room");
                     _roomController.UpdateRoom();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 3:
                     Console.WriteLine("Remove room");
                     _roomController.RemoveRoom();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 4:
                     Console.WriteLine("List of all inactive rooms");
                     _roomController.GetInactiveRooms();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 5:
                     Console.WriteLine("Delete a room");
                     _roomController.DeleteRoom();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunRoomMenu();
                     break;
                 case 6:
                     RunMainMenu();
@@ -98,36 +104,44 @@ namespace HotelBookingApp.Controllers
                 case 0:
                     Console.WriteLine("List of all guests");
                     _guestController.GetActiveGuests();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 1:
                     Console.WriteLine("Search for a guest with Id");
                     _guestController.SearchGuest();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 2:
                     Console.WriteLine("Adding new guest");
                     _guestController.AddGuest();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 3:
                     Console.WriteLine("Updating guest");
                     _guestController.UpdateGuest();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 4:
                     Console.WriteLine("Removing guest");
                     _guestController.RemoveGuest();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 5:
                     Console.WriteLine("List of all inactive guests");
                     _guestController.GetInactiveGuests();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 6:
                     Console.WriteLine("Delete a guest");
                     _guestController.DeleteGuest();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunGuestMenu();
                     break;
                 case 7:
                     RunMainMenu();
@@ -145,26 +159,36 @@ namespace HotelBookingApp.Controllers
                 case 0:
                     Console.WriteLine("List of all Reservations");
                     _reservationController.GetActiveReservations();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
                     break;
                 case 1:
                     Console.WriteLine("Adding new Reservation");
                     _reservationController.AddReservation();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
                     break;
                 case 2:
                     Console.WriteLine("Updating booking");
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
                     break;
                 case 3:
                     Console.WriteLine("Removing booking");
                     _reservationController.RemoveReservation();
-                    Console.ReadKey();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
                     break;
                 case 4:
                     RunMainMenu();
                     break;
             }
+        }
+
+        public void ReturnToPreviousMenu()
+        {
+            Console.WriteLine("Press any key to go back to previous menu");
+            Console.ReadKey();
         }
     }
 }

@@ -61,6 +61,7 @@ namespace HotelBookingApp.Controllers
 
         public Room GetRoomOptionInput(List<Room> rooms)
         {
+            DisplayEntities.ShowRoomTable(rooms);
             var roomsArrayForDisplay = rooms.Select(r => r.RoomNumber.ToString()).ToArray();
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Choose Room")

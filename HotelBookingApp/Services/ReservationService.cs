@@ -16,9 +16,10 @@ namespace HotelBookingApp.Services
         {
             _dbContext = dbContext;
         }
-        public void CreateNewReservation()
+        public void CreateNewReservation(Reservation reservation)
         {
-
+            _dbContext.Add(reservation);
+            _dbContext.SaveChanges();
         }
 
         public List<Reservation> ReadActiveReservations()
@@ -31,6 +32,19 @@ namespace HotelBookingApp.Services
             return _dbContext.Reservations.Where(r => r.IsActive == false).ToList();
         }
 
+        public List<Room> GetAvailableRooms(DateTime arrivalDate, DateTime departureDate, List<Reservation> activeReservations)
+        {
+            List<Room> availableRooms = _dbContext.Rooms.ToList();
+            foreach (Reservation r in activeReservations)
+            {
+                if (arrivalDate >= r.ArrivalDate && departureDate <= r.ArrivalDate.AddDays(r.LengthOfStay))
+                {
+                    //room is not available
+                    availableRooms.Remove(r.Room);
+                }
+            }
+            return availableRooms;
+        }
         public void UpdateReservation()
         {
 

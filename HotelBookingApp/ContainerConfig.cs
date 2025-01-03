@@ -57,19 +57,6 @@ namespace HotelBookingApp
                 return new ApplicationDbContext(optionsBuilder.Options);
             }).InstancePerLifetimeScope();
 
-
-            //builder.RegisterAssemblyTypes(Assembly.Load(nameof(HotelBookingApp)))
-            //    .Where(t => t.Name.EndsWith("Service"))
-            //    .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
-
-            //builder.RegisterAssemblyTypes(Assembly.Load(nameof(HotelBookingApp)))
-            //    .Where(t => t.Name.EndsWith("Controller"))
-            //    .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
-
-            //builder.RegisterAssemblyTypes(Assembly.Load(nameof(HotelBookingApp)))
-            //    .Where(t => t.Name.EndsWith("Menu"))
-            //    .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == "I" + t.Name));
-
             return builder.Build();
         }
     }

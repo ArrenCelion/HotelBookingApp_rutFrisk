@@ -16,7 +16,6 @@ namespace HotelBookingApp.Data //Kom ihåg att ändra namespace
         // DbSet-skikt för att representera tabellerna i databasen.
         // Varje DbSet skapar en "tabell" i databasen för respektive typ.
         public DbSet<Guest> Guests { get; set; }
-        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 

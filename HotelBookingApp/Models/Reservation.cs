@@ -13,12 +13,12 @@ namespace HotelBookingApp.Models
         public DateTime ArrivalDate { get; set; }
         public int LengthOfStay { get; set; }
         public bool IsActive { get; set; }
+        public bool WantsExtraBed { get; set; }
 
         [Required]
         public Room Room { get; set; }
         [Required]
         public Guest Guest { get; set; }
-        [Required]
-        public Invoice Invoice { get; set; }
+
     }
 }

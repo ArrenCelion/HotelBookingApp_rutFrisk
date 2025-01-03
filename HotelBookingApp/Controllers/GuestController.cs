@@ -71,9 +71,6 @@ namespace HotelBookingApp.Controllers
                 guest.City = city;
                 guest.IsActive = isActive;
                 _guestService.CreateNewGuest(guest);
-                Console.ReadKey();
-                Console.WriteLine("Press any key to return to previous menu");
-                // RedirectingService to call the menucontroller from further down the stack? _menuController.RunGuestMenu();
             }
             else
             {
