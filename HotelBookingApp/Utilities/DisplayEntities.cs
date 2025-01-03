@@ -6,12 +6,6 @@ namespace HotelBookingApp.Utilities
 {
     public class DisplayEntities
     {
-        //MenuController _menuController;
-        //public DisplayEntities(MenuController menuController)
-        //{
-        //    _menuController = menuController;
-        //}
-
         public static void ShowGuestTable(List<Guest> guests)
         {
             var guestTable = new Table();
@@ -42,7 +36,6 @@ namespace HotelBookingApp.Utilities
             roomTable.AddColumn("Room Size");
             roomTable.AddColumn("Room type");
 
-
             foreach (Room room in rooms)
             {
                 string singleRoom = "Single";
@@ -67,7 +60,6 @@ namespace HotelBookingApp.Utilities
             }
 
             AnsiConsole.Write(roomTable);
-
         }
 
         public static void ShowReservationTable(List<Reservation> reservations)
@@ -78,17 +70,20 @@ namespace HotelBookingApp.Utilities
             reservationsTable.AddColumn("Room");
             reservationsTable.AddColumn("Arrival Date");
             reservationsTable.AddColumn("Length of stay (nights)");
+            reservationsTable.AddColumn("Wants extra bed");
 
             foreach (Reservation reservation in reservations)
             {
                 reservationsTable.AddRow(
                     reservation.ReservationId.ToString(),
-                    reservation.Guest.LastName + ", " + reservation.Guest.FirstName,
+                    reservation.Guest.FirstName + " " + reservation.Guest.LastName,
                     reservation.Room.RoomNumber.ToString(),
                     reservation.ArrivalDate.ToShortDateString(),
-                    reservation.LengthOfStay.ToString()
-                    );
+                    reservation.LengthOfStay.ToString(),
+                    reservation.WantsExtraBed ? "Yes" : "No"
+                );
             }
+
             AnsiConsole.Write(reservationsTable);
         }
     }

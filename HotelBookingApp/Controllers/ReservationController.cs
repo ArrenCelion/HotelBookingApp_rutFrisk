@@ -80,6 +80,7 @@ namespace HotelBookingApp.Controllers
                 reservation.Room = roomChoice;
                 reservation.Guest = guest;
                 reservation.IsActive = true;
+                reservation.WantsExtraBed = wantsExtraBed;
                 _reservationService.CreateNewReservation(reservation);
                 Console.WriteLine("Reservation created successfully");
             }
@@ -88,18 +89,23 @@ namespace HotelBookingApp.Controllers
                 AnsiConsole.MarkupLine("[bold red]Reservation cancelled.[/]");
             }
         }
+
+        public void UpdateReservation()
+        {
+
+        }
     
 
         public Reservation GetReservationOptionInput(List<Reservation> reservations)
         {
-            var reservationArrayToDisplay = reservations.Select(r => r.ReservationId.ToString()).ToArray();
+            var reservationArrayToDisplay = reservations.Select(r => r.ReservationId.ToString() + " " + r.Guest.FirstName + " " + r.Guest.LastName).ToArray();
             if (reservationArrayToDisplay.Length != 0)
             {
                 var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("Select a reservation")
                             .AddChoices(reservationArrayToDisplay));
 
-                var id = reservations.Single(r => r.ReservationId.ToString() == option).ReservationId;
+                var id = reservations.Single(r => r.ReservationId.ToString() + " " + r.Guest.FirstName + " " + r.Guest.LastName == option).ReservationId;
                 var reservation = _reservationService.GetReservationFromID(id);
 
                 return reservation;

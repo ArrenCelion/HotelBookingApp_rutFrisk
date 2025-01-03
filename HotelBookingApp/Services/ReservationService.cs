@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HotelBookingApp.Data;
 using HotelBookingApp.Models;
 using HotelBookingApp.Services.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBookingApp.Services
 {
@@ -24,22 +25,30 @@ namespace HotelBookingApp.Services
 
         public List<Reservation> ReadActiveReservations()
         {
-            return _dbContext.Reservations.Where(r => r.IsActive == true).ToList();
+            return _dbContext.Reservations
+                .Include(r => r.Room)
+                .Include(r => r.Guest)
+                .Where(r => r.IsActive == true)
+                .ToList();
         }
 
         public List<Reservation> ReadInactiveReservations()
         {
-            return _dbContext.Reservations.Where(r => r.IsActive == false).ToList();
+            return _dbContext.Reservations
+                .Include(r => r.Room)
+                .Include(r => r.Guest)
+                .Where(r => r.IsActive == false)
+                .ToList();
         }
-
+    
         public List<Room> GetAvailableRooms(DateTime arrivalDate, DateTime departureDate, List<Reservation> activeReservations)
         {
             List<Room> availableRooms = _dbContext.Rooms.ToList();
             foreach (Reservation r in activeReservations)
             {
-                if (arrivalDate >= r.ArrivalDate && departureDate <= r.ArrivalDate.AddDays(r.LengthOfStay))
+                if (arrivalDate < r.ArrivalDate.AddDays(r.LengthOfStay) && departureDate > r.ArrivalDate)
                 {
-                    //room is not available
+                    // room is not available
                     availableRooms.Remove(r.Room);
                 }
             }
@@ -58,6 +67,7 @@ namespace HotelBookingApp.Services
             var reservationToRemove = _dbContext.Reservations
                 .SingleOrDefault(r => r.ReservationId == reservation.ReservationId);
             reservationToRemove.IsActive = reservation.IsActive;
+            _dbContext.SaveChanges();
         }
 
         public void HardDeleteReservation(Reservation reservation)
