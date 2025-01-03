@@ -14,12 +14,16 @@ namespace HotelBookingApp.Controllers
     public class ReservationController : IReservationController
     {
         IReservationService _reservationService;
-        public ReservationController(IReservationService reservationService)
+        ICalendarController _calendarController;
+        public ReservationController(IReservationService reservationService, ICalendarController calendarController)
         {
             _reservationService = reservationService;
+            _calendarController = calendarController;
         }
         public void AddReservation()
         {
+            var arrivalDate = _calendarController.GetCalendarInput();
+            Console.WriteLine(arrivalDate.ToShortDateString());
             //How to connect the reservation to guest and room?
             //using spectre calendar to select 
         }

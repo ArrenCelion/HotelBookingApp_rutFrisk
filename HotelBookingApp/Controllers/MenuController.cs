@@ -148,7 +148,8 @@ namespace HotelBookingApp.Controllers
                     Console.ReadKey();
                     break;
                 case 1:
-                    Console.WriteLine("Adding new booking");
+                    Console.WriteLine("Adding new Reservation");
+                    _reservationController.AddReservation();
                     Console.ReadKey();
                     break;
                 case 2:
