@@ -4,7 +4,7 @@ namespace HotelBookingApp.Services.ServiceInterfaces
 {
     public interface IMenuService
     {
-        DisplayMenu CreateBookingMenu();
+        DisplayMenu CreateReservationMenu();
         DisplayMenu CreateGuestMenu();
         DisplayMenu CreateMainMenu();
         DisplayMenu CreateRoomMenu();

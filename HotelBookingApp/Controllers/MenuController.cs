@@ -38,7 +38,7 @@ namespace HotelBookingApp.Controllers
                     RunGuestMenu();
                     break;
                 case 2:
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 3:
                     Environment.Exit(0);
@@ -54,37 +54,37 @@ namespace HotelBookingApp.Controllers
             switch (selectedIndex)
             {
                 case 0:
-                    Console.WriteLine("List of all rooms");
+                    
                     _roomController.GetActiveRooms();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
                     break;
                 case 1:
-                    Console.WriteLine("Add new room");
+                    
                     _roomController.AddRoom();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Update room");
+                    
                     _roomController.UpdateRoom();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
                     break;
                 case 3:
-                    Console.WriteLine("Remove room");
+                    
                     _roomController.RemoveRoom();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
                     break;
                 case 4:
-                    Console.WriteLine("List of all inactive rooms");
+                    
                     _roomController.GetInactiveRooms();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
                     break;
                 case 5:
-                    Console.WriteLine("Delete a room");
+                    
                     _roomController.DeleteRoom();
                     ReturnToPreviousMenu();
                     RunRoomMenu();
@@ -102,43 +102,43 @@ namespace HotelBookingApp.Controllers
             switch (selectedIndex)
             {
                 case 0:
-                    Console.WriteLine("List of all guests");
+                    
                     _guestController.GetActiveGuests();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 1:
-                    Console.WriteLine("Search for a guest with Id");
+                    
                     _guestController.SearchGuest();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Adding new guest");
+                    
                     _guestController.AddGuest();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 3:
-                    Console.WriteLine("Updating guest");
+                    
                     _guestController.UpdateGuest();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 4:
-                    Console.WriteLine("Removing guest");
+                    
                     _guestController.RemoveGuest();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 5:
-                    Console.WriteLine("List of all inactive guests");
+                    
                     _guestController.GetInactiveGuests();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
                     break;
                 case 6:
-                    Console.WriteLine("Delete a guest");
+                    
                     _guestController.DeleteGuest();
                     ReturnToPreviousMenu();
                     RunGuestMenu();
@@ -149,48 +149,48 @@ namespace HotelBookingApp.Controllers
             }
         }
 
-        public void RunBookingMenu()
+        public void RunReservationMenu()
         {
-            var bookingMenu = _menuService.CreateBookingMenu();
-            int selectedIndex = bookingMenu.Run();
+            var reservationMenu = _menuService.CreateReservationMenu();
+            int selectedIndex = reservationMenu.Run();
 
             switch (selectedIndex)
             {
                 case 0:
-                    Console.WriteLine("List of all Reservations");
+                    
                     _reservationController.GetActiveReservations();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 1:
-                    Console.WriteLine("Adding new Reservation");
+                    
                     _reservationController.AddReservation();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Updating Reservation");
+                   
                     _reservationController.UpdateReservation();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 3:
-                    Console.WriteLine("Removing Reservation");
+                    
                     _reservationController.RemoveReservation();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 4:
-                    Console.WriteLine("List of all inactive Reservations");
+                    
                     _reservationController.GetInactiveReservations();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 5:
-                    Console.WriteLine("Delete a Reservation");
+                    
                     _reservationController.DeleteReservation();
                     ReturnToPreviousMenu();
-                    RunBookingMenu();
+                    RunReservationMenu();
                     break;
                 case 6:
                     RunMainMenu();

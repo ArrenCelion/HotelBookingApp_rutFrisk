@@ -12,9 +12,7 @@ namespace HotelBookingApp
             {
                 var app = scope.Resolve<IApplication>();
                 app.Run();
-            }
-           
-            
+            }           
         }
     }
 }

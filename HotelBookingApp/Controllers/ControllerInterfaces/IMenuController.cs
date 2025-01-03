@@ -4,7 +4,7 @@ namespace HotelBookingApp.Controllers.ControllerInterfaces
 {
     public interface IMenuController
     {
-        void RunBookingMenu();
+        void RunReservationMenu();
         void RunGuestMenu();
         void RunMainMenu();
         void RunRoomMenu();

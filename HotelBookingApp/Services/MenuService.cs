@@ -17,7 +17,7 @@ namespace HotelBookingApp.Services
         public DisplayMenu CreateMainMenu()
         {
             string prompt = "Welcome to the Hotell, what do you wanna check?";
-            string[] options = { "Rooms", "Guests", "Bookings", "Close Application" };
+            string[] options = { "Rooms", "Guests", "Reservations", "Close Application" };
             DisplayMenu mainMenu = new DisplayMenu(prompt, options);
 
             return mainMenu;
@@ -41,7 +41,7 @@ namespace HotelBookingApp.Services
             return guestMenu;
         }
 
-        public DisplayMenu CreateBookingMenu()
+        public DisplayMenu CreateReservationMenu()
         {
             string prompt = "Reservation Menu:";
             string[] options = { "See all Reservations", "New Reservation", "Update Reservation", "Remove Reservation", "See all removed Reservations", "Delete Reservation", "Back to Main Menu" };
