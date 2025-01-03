@@ -8,9 +8,11 @@ namespace HotelBookingApp.Services.ServiceInterfaces
         void HardDeleteReservation(Reservation reservation);
         List<Reservation> ReadActiveReservations();
         List<Reservation> ReadInactiveReservations();
+        List<Reservation> ReadAllReservations();
         Reservation GetReservationFromID(int reservationId);
         void RemoveReservation(Reservation reservation);
-        void UpdateReservation();
-        List<Room> GetAvailableRooms(DateTime arrivalDate, DateTime departureDate, List<Reservation> activeReservations);
+        void UpdateReservation(Reservation reservation);
+        List<Room> GetAvailableRooms(DateTime arrivalDate, int lengthOfStay);
+        Room GetRoomChoice(DateTime arrivalDate, int lengthOfStay);
     }
 }

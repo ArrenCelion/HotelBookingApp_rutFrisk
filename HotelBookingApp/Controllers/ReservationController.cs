@@ -7,6 +7,7 @@ using HotelBookingApp.Controllers.ControllerInterfaces;
 using HotelBookingApp.Models;
 using HotelBookingApp.Services.ServiceInterfaces;
 using HotelBookingApp.Utilities;
+using Microsoft.Identity.Client;
 using Spectre.Console;
 
 namespace HotelBookingApp.Controllers
@@ -32,25 +33,11 @@ namespace HotelBookingApp.Controllers
             var arrivalDate = _calendarController.GetCalendarInput();
             var lengthOfStay = AnsiConsole.Ask<int>("Enter the length of stay in nights");
             var departureDate = arrivalDate.AddDays(lengthOfStay);
-            var activeReservations = _reservationService.ReadActiveReservations();
-            List<Room> availableRooms = _reservationService.GetAvailableRooms(arrivalDate, departureDate, activeReservations);
-            if(availableRooms == null)
-            {
-                Console.WriteLine("No rooms available for the selected dates");
+            var roomChoice = _reservationService.GetRoomChoice(arrivalDate, lengthOfStay);
+            if (roomChoice == null)
                 return;
+            bool wantsExtraBed = ExtraBed(roomChoice);
 
-            }
-            //extract method
-            var roomChoice = _roomController.GetRoomOptionInput(availableRooms);
-            bool wantsExtraBed = false;
-            if (!roomChoice.IsSingle && roomChoice.RoomSize >= 15)
-            {
-                if(AnsiConsole.Confirm("Would you like to add an extra bed to the room?"))
-                {
-                     wantsExtraBed = true;
-                }              
-            }
-            
             if (!AnsiConsole.Confirm("Are you registered as a guest?"))
             {
                 _guestController.AddGuest();
@@ -92,7 +79,89 @@ namespace HotelBookingApp.Controllers
 
         public void UpdateReservation()
         {
+            var allReservations = _reservationService.ReadAllReservations();
+            var reservation = GetReservationOptionInput(allReservations);
 
+            if (AnsiConsole.Confirm("Update ArrivalDate"))
+            {
+                while (true)
+                {
+                    reservation.ArrivalDate = _calendarController.GetCalendarInput();
+                     
+                    //Fix DRY??
+                    var availableRooms = _reservationService.GetAvailableRooms(reservation.ArrivalDate, reservation.LengthOfStay);
+                    bool isRoomAvailable = availableRooms.Any(r => r.RoomId == reservation.Room.RoomId);
+                    if (!isRoomAvailable)
+                    {
+                        Console.WriteLine("Your current room is not available for the selected dates, please select a new room or change the dates");
+                        if (!AnsiConsole.Confirm("Update room"))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            var roomChoice = _reservationService.GetRoomChoice(reservation.ArrivalDate, reservation.LengthOfStay);
+                            reservation.Room = roomChoice;
+                            break;
+                        }
+                    }
+                    else break;
+                } //End of while loop
+            }
+            if (AnsiConsole.Confirm("Update Length of Stay"))
+            {
+                while (true)
+                {
+                    int newLengthOfStay = AnsiConsole.Ask<int>("Enter the length of stay in nights");
+                    var availableRooms = _reservationService.GetAvailableRooms(reservation.ArrivalDate, newLengthOfStay);
+                    reservation.LengthOfStay = newLengthOfStay;
+
+                    bool isRoomAvailable = availableRooms.Any(r => r.RoomId == reservation.Room.RoomId);
+                    if (!isRoomAvailable)
+                    {
+                        Console.WriteLine("Your current room is not available for the selected length of stay, please select a new room or change the length of stay.");
+                        if (!AnsiConsole.Confirm("Update room"))
+                        {
+                            
+                            continue;
+                        }
+                        else
+                        {
+                            var roomChoice = _reservationService.GetRoomChoice(reservation.ArrivalDate, newLengthOfStay);
+                            reservation.Room = roomChoice;
+                            break;
+                        }
+                    }
+                    else break;
+                } //End of while loop
+            }
+
+            if (AnsiConsole.Confirm("Update room"))
+            {
+                var roomChoice = _reservationService.GetRoomChoice(reservation.ArrivalDate, reservation.LengthOfStay);
+                reservation.Room = roomChoice;
+            }
+            if (AnsiConsole.Confirm("Update Guest"))
+            {
+                var activeGuests = _guestService.ReadActiveGuests();
+                var guest = _guestController.GetGuestOptionInput(activeGuests);
+                reservation.Guest = guest;
+            }
+            if(reservation.Room.IsSingle && reservation.Room.RoomSize < 15)
+            {
+                if (AnsiConsole.Confirm("Update choice about extra bed?"))
+                {
+                    reservation.WantsExtraBed = false;
+                }
+            }
+            else
+                reservation.WantsExtraBed = ExtraBed(reservation.Room);
+
+            if (AnsiConsole.Confirm("Update Active Status?"))
+            {
+                reservation.IsActive = AnsiConsole.Confirm("Is the reservation Active?");
+            }
+            _reservationService.UpdateReservation(reservation);
         }
     
 
@@ -114,6 +183,19 @@ namespace HotelBookingApp.Controllers
             return null;
 
         }
+        public bool ExtraBed(Room roomChoice)
+        {
+            bool wantsExtraBed = false;
+            if (!roomChoice.IsSingle && roomChoice.RoomSize >= 15)
+            {
+                if (AnsiConsole.Confirm("Would you like to add an extra bed to the room?"))
+                {
+                    wantsExtraBed = true;
+                }
+            }
+            return wantsExtraBed;
+        }
+
         public void GetActiveReservations()
         {
             var activeReservations = _reservationService.ReadActiveReservations();

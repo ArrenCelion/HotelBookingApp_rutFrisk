@@ -169,17 +169,30 @@ namespace HotelBookingApp.Controllers
                     RunBookingMenu();
                     break;
                 case 2:
-                    Console.WriteLine("Updating booking");
+                    Console.WriteLine("Updating Reservation");
+                    _reservationController.UpdateReservation();
                     ReturnToPreviousMenu();
                     RunBookingMenu();
                     break;
                 case 3:
-                    Console.WriteLine("Removing booking");
+                    Console.WriteLine("Removing Reservation");
                     _reservationController.RemoveReservation();
                     ReturnToPreviousMenu();
                     RunBookingMenu();
                     break;
                 case 4:
+                    Console.WriteLine("List of all inactive Reservations");
+                    _reservationController.GetInactiveReservations();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
+                    break;
+                case 5:
+                    Console.WriteLine("Delete a Reservation");
+                    _reservationController.DeleteReservation();
+                    ReturnToPreviousMenu();
+                    RunBookingMenu();
+                    break;
+                case 6:
                     RunMainMenu();
                     break;
             }

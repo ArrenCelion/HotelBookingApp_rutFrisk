@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelBookingApp.Controllers.ControllerInterfaces;
 using HotelBookingApp.Data;
 using HotelBookingApp.Models;
 using HotelBookingApp.Services.ServiceInterfaces;
@@ -13,9 +14,11 @@ namespace HotelBookingApp.Services
     public class ReservationService : IReservationService
     {
         ApplicationDbContext _dbContext;
-        public ReservationService(ApplicationDbContext dbContext)
+        IRoomController _roomController;
+        public ReservationService(ApplicationDbContext dbContext, IRoomController roomController)
         {
             _dbContext = dbContext;
+            _roomController = roomController;
         }
         public void CreateNewReservation(Reservation reservation)
         {
@@ -40,9 +43,20 @@ namespace HotelBookingApp.Services
                 .Where(r => r.IsActive == false)
                 .ToList();
         }
-    
-        public List<Room> GetAvailableRooms(DateTime arrivalDate, DateTime departureDate, List<Reservation> activeReservations)
+
+        public List<Reservation> ReadAllReservations()
         {
+            return _dbContext.Reservations
+                .Include(r => r.Room)
+                .Include(r => r.Guest)
+                .ToList();
+        }
+
+        //Move to room service or room controller?
+        public List<Room> GetAvailableRooms(DateTime arrivalDate, int lengthOfStay)
+        {
+            var departureDate = arrivalDate.AddDays(lengthOfStay);
+            var activeReservations = ReadActiveReservations();
             List<Room> availableRooms = _dbContext.Rooms.ToList();
             foreach (Reservation r in activeReservations)
             {
@@ -54,11 +68,31 @@ namespace HotelBookingApp.Services
             }
             return availableRooms;
         }
-        public void UpdateReservation()
+        public Room GetRoomChoice(DateTime arrivalDate, int lengthOfStay)
         {
-
+            List<Room> availableRooms = GetAvailableRooms(arrivalDate, lengthOfStay);
+            if (availableRooms == null)
+            {
+                Console.WriteLine("No rooms available for the selected dates");
+                return null;
+            }
+            var roomChoice = _roomController.GetRoomOptionInput(availableRooms);
+            return roomChoice;
         }
-       public Reservation GetReservationFromID(int reservationId)
+
+        public void UpdateReservation(Reservation reservation)
+        {
+            var reservationToUpdate = _dbContext.Reservations
+                .SingleOrDefault(r => r.ReservationId == reservation.ReservationId);
+            reservationToUpdate.ArrivalDate = reservation.ArrivalDate;
+            reservationToUpdate.LengthOfStay = reservation.LengthOfStay;
+            reservationToUpdate.Room = reservation.Room;
+            reservation.Guest = reservation.Guest;
+            reservation.WantsExtraBed = reservation.WantsExtraBed;
+            reservation.IsActive = reservation.IsActive;
+            _dbContext.SaveChanges();
+        }
+        public Reservation GetReservationFromID(int reservationId)
         {
             return _dbContext.Reservations.SingleOrDefault(r => r.ReservationId == reservationId);
         }

@@ -44,7 +44,7 @@ namespace HotelBookingApp.Services
         public DisplayMenu CreateBookingMenu()
         {
             string prompt = "Reservation Menu:";
-            string[] options = { "See all Bookings", "New Reservation", "Update Reservation", "Remove Reservation", "Back to Main Menu" };
+            string[] options = { "See all Reservations", "New Reservation", "Update Reservation", "Remove Reservation", "See all removed Reservations", "Delete Reservation", "Back to Main Menu" };
             DisplayMenu guestMenu = new DisplayMenu(prompt, options);
 
             return guestMenu;
