@@ -72,8 +72,8 @@ namespace HotelBookingApp.Controllers
                 if (!results.IsValid)
                 {
                     foreach (var failure in results.Errors)
-                    {
-                        Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error: " + failure.ErrorMessage);
+                    {                      
+                        AnsiConsole.MarkupLine($"[red]Property {failure.PropertyName} failed validation. Error: {failure.ErrorMessage}[/]");
                     }
                     continue;
                 }
@@ -188,7 +188,7 @@ namespace HotelBookingApp.Controllers
                 {
                     foreach (var failure in results.Errors)
                     {
-                        Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error: " + failure.ErrorMessage);
+                        AnsiConsole.MarkupLine($"[red]Property {failure.PropertyName} failed validation. Error: {failure.ErrorMessage}[/]");
                     }                   
                     Console.ReadKey();
                     Console.Clear();

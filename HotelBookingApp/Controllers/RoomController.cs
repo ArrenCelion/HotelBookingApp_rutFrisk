@@ -23,8 +23,18 @@ namespace HotelBookingApp.Controllers
         public void AddRoom()
         {
             var room = new Room();
-            room.RoomNumber = AnsiConsole.Ask<int>("Room number:"); //Add validation that the roomnumber isn't already in use?
+            room.RoomNumber = AnsiConsole.Ask<int>("Room number:");
+            _roomService.ReadAllRooms().ForEach(r =>
+            {
+                if (r.RoomNumber == room.RoomNumber)
+                {
+                    AnsiConsole.MarkupLine("[red]Room number already exists. Please choose another number.[/]");
+                    room.RoomNumber = AnsiConsole.Ask<int>("Room number:");
+                }
+            });
+
             room.RoomSize = AnsiConsole.Ask<int>("Room Size:");
+
             if (AnsiConsole.Confirm("Is it a Single Room?"))
             {
                 room.IsSingle = true;
@@ -80,6 +90,14 @@ namespace HotelBookingApp.Controllers
             if (AnsiConsole.Confirm("Update Room Number?"))
             {
                 room.RoomNumber = AnsiConsole.Ask<int>("Enter new Room Number:");
+                _roomService.ReadAllRooms().ForEach(r =>
+                {
+                    if (r.RoomNumber == room.RoomNumber)
+                    {
+                        AnsiConsole.MarkupLine("[red]Room number already exists. Please choose another number.[/]");
+                        room.RoomNumber = AnsiConsole.Ask<int>("Room number:");
+                    }
+                });
             }
             if (AnsiConsole.Confirm("Update Room Size?"))
             {
