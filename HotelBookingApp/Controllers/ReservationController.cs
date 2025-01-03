@@ -30,14 +30,17 @@ namespace HotelBookingApp.Controllers
         }
         public void AddReservation()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Add Reservation[/]");
             var arrivalDate = _calendarController.GetCalendarInput();
-            var lengthOfStay = AnsiConsole.Ask<int>("Enter the length of stay in nights");
+            var lengthOfStay = AnsiConsole.Ask<int>("Enter the length of stay in nights:");
             var departureDate = arrivalDate.AddDays(lengthOfStay);
+            Console.Clear();
             var roomChoice = _reservationService.GetRoomChoice(arrivalDate, lengthOfStay);
             if (roomChoice == null)
                 return;
             bool wantsExtraBed = ExtraBed(roomChoice);
-
+            Console.Clear();
             if (!AnsiConsole.Confirm("Are you registered as a guest?"))
             {
                 _guestController.AddGuest();
@@ -79,6 +82,8 @@ namespace HotelBookingApp.Controllers
 
         public void UpdateReservation()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Update Reservation[/]");
             var allReservations = _reservationService.ReadAllReservations();
             var reservation = GetReservationOptionInput(allReservations);
 
@@ -198,18 +203,24 @@ namespace HotelBookingApp.Controllers
 
         public void GetActiveReservations()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Active Reservations[/]");
             var activeReservations = _reservationService.ReadActiveReservations();
             DisplayEntities.ShowReservationTable(activeReservations);
         }
 
         public void GetInactiveReservations()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Inactive Reservations[/]");
             var inactiveReservations = _reservationService.ReadInactiveReservations();
             DisplayEntities.ShowReservationTable(inactiveReservations);
         }
 
         public void RemoveReservation()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Remove Reservation[/]");
             var activeReservations = _reservationService.ReadActiveReservations();
             var reservation = GetReservationOptionInput(activeReservations);
 
@@ -225,6 +236,8 @@ namespace HotelBookingApp.Controllers
 
         public void DeleteReservation()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Delete Reservation[/]");
             var inactiveReservations = _reservationService.ReadInactiveReservations();
             var reservation = GetReservationOptionInput(inactiveReservations);
             if (reservation == null)

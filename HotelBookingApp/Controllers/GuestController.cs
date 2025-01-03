@@ -27,6 +27,8 @@ namespace HotelBookingApp.Controllers
         }
         public void AddGuest()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Add new Guest[/]");
             var guest = new Guest();
             while (true)
             {
@@ -116,17 +118,23 @@ namespace HotelBookingApp.Controllers
 
         public void GetActiveGuests()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Active Guests[/]");
             var activeGuests = _guestService.ReadActiveGuests();
             DisplayEntities.ShowGuestTable(activeGuests);
         }
 
         public void GetInactiveGuests()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Inactive Guests[/]");
             var inactiveGuests = _guestService.ReadInActiveGuests();
             DisplayEntities.ShowGuestTable(inactiveGuests);
         }
         public void SearchGuest()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Search Guest[/]");
             int guestId = AnsiConsole.Ask<int>("Enter Guest ID:");
             var guest = _guestService.GetGuestFromID(guestId);
             if (guest == null)
@@ -138,6 +146,8 @@ namespace HotelBookingApp.Controllers
         }
         public void UpdateGuest()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Update Guest[/]");
             while (true)
             {
                 Console.WriteLine("Choose a guest to update:");
@@ -205,6 +215,8 @@ namespace HotelBookingApp.Controllers
 
         public void RemoveGuest()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Remove Guest[/]");
             var activeGuests = _guestService.ReadActiveGuests();
             var guest = GetGuestOptionInput(activeGuests);
             if (AnsiConsole.Confirm("Are you sure you want to remove this guest? This will inactivate the guest so they can no longer make reservations"))
@@ -216,6 +228,8 @@ namespace HotelBookingApp.Controllers
         
         public void DeleteGuest()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Delete Guest[/]");
             var inactiveGuests = _guestService.ReadInActiveGuests();
             var guest = GetGuestOptionInput(inactiveGuests);
             if (AnsiConsole.Confirm("Are you sure you want to delete this guest? This will permanently delete the guest from the database and it will not be recoverable."))

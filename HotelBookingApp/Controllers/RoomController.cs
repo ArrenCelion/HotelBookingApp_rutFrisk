@@ -22,6 +22,8 @@ namespace HotelBookingApp.Controllers
         }
         public void AddRoom()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Add new Room[/]");
             var room = new Room();
             room.RoomNumber = AnsiConsole.Ask<int>("Room number:");
             _roomService.ReadAllRooms().ForEach(r =>
@@ -58,6 +60,7 @@ namespace HotelBookingApp.Controllers
         public void GetActiveRooms()
         {
             Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Active Rooms[/]");
             var activeRooms = _roomService.ReadActiveRooms();
             DisplayEntities.ShowRoomTable(activeRooms);
         }
@@ -65,6 +68,7 @@ namespace HotelBookingApp.Controllers
         public void GetInactiveRooms()
         {
             Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Inactive Rooms[/]");
             var inactiveRooms = _roomService.ReadInActiveRooms();
             DisplayEntities.ShowRoomTable(inactiveRooms);
         }
@@ -85,6 +89,8 @@ namespace HotelBookingApp.Controllers
 
         public void UpdateRoom()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Update Room[/]");
             var allRooms = _roomService.ReadAllRooms();
             var room = GetRoomOptionInput(allRooms);
             if (AnsiConsole.Confirm("Update Room Number?"))
@@ -116,6 +122,8 @@ namespace HotelBookingApp.Controllers
 
         public void RemoveRoom()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Remove Room[/]");
             var activeRooms = _roomService.ReadActiveRooms();
             var room = GetRoomOptionInput(activeRooms);
             if (AnsiConsole.Confirm("Are you sure you want to remove this room? This will inactivate the room so that it's not bookable"))
@@ -128,6 +136,8 @@ namespace HotelBookingApp.Controllers
 
         public void DeleteRoom()
         {
+            Console.Clear();
+            AnsiConsole.MarkupLine("[bold]Delete Room[/]");
             var inactiveRooms = _roomService.ReadInActiveRooms();
             var room = GetRoomOptionInput(inactiveRooms);
             if (AnsiConsole.Confirm("Are you sure you want to delete this room? This will permanently delete the room from the database and it will not be recoverable."))
